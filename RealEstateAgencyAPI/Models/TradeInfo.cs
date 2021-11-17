@@ -16,6 +16,7 @@ namespace RealEstateAgencyAPI.Models
 
         public byte IdInfo { get; set; }
         public string Name { get; set; }
+        public string KeyName { get; set; }
         public string ShortName { get; set; }
         public string Description { get; set; }
         public string Domain { get; set; }

@@ -31,7 +31,7 @@ namespace RealEstateAgencyAPI.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySQL("server=localhost;user=root;password=Start123!;port=3300;database=estate_agency_db;");
+                optionsBuilder.UseMySQL("server=localhost;port=3300;user=root;password=Start123!;database=estate_agency_db");
             }
         }
 
@@ -117,7 +117,9 @@ namespace RealEstateAgencyAPI.Models
                     .HasMaxLength(12)
                     .HasColumnName("phone_number");
 
-                entity.Property(e => e.PhotoUrl).HasColumnName("photo_url");
+                entity.Property(e => e.PhotoUrl)
+                    .HasMaxLength(100)
+                    .HasColumnName("photo_url");
 
                 entity.HasOne(d => d.AreaNavigation)
                     .WithMany(p => p.Agents)
@@ -462,14 +464,22 @@ namespace RealEstateAgencyAPI.Models
                     .HasColumnName("description");
 
                 entity.Property(e => e.Domain)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("domain");
 
+                entity.Property(e => e.KeyName)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .HasColumnName("key_name");
+
                 entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("name");
 
                 entity.Property(e => e.ShortName)
+                    .IsRequired()
                     .HasMaxLength(3)
                     .HasColumnName("short_name");
             });

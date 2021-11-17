@@ -20,7 +20,7 @@ namespace RealEstateAgencyAPI.Models
         public byte Area { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public int? PhotoUrl { get; set; }
+        public string PhotoUrl { get; set; }
         public string Description { get; set; }
 
         public virtual TradeInfo AreaNavigation { get; set; }

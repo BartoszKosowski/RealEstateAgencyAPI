@@ -2,12 +2,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MySql.Data.MySqlClient;
+using MySql.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -37,6 +39,9 @@ namespace RealEstateAgencyAPI
             .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
                 .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
+            //Add dependency injection
+            services.AddDbContext<Models.estate_agency_dbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Test")));
+
             //MySQL connector
             services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration.GetConnectionString("Test")));
 
@@ -51,6 +56,9 @@ namespace RealEstateAgencyAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -61,6 +69,8 @@ namespace RealEstateAgencyAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseAuthorization();
 
