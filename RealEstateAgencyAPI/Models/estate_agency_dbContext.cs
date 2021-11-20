@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using RealEstateAgencyAPI.Models;
 
 #nullable disable
 
@@ -414,10 +415,32 @@ namespace RealEstateAgencyAPI.Models
                     .HasMaxLength(100)
                     .HasColumnName("photo_url");
 
+
                 entity.HasOne(d => d.EstateNavigation)
                     .WithMany(p => p.Photos)
                     .HasForeignKey(d => d.Estate)
                     .HasConstraintName("FK_photo_estate");
+            });
+
+            modelBuilder.Entity<Request>(entity =>
+            {
+                entity.HasKey(e => e.IdRequest).HasName("PRIMARY");
+
+                entity.ToTable("requests");
+
+                entity.HasIndex(e => e.Service, "FK_request_trade_info_idx");
+                entity.HasIndex(e => e.Status, "FK_request_status_idx");
+
+                entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(50);
+                entity.Property(e => e.LastName).HasColumnName("last_name").HasMaxLength(50);
+                entity.Property(e => e.PhoneNumber).HasColumnName("phone_name").HasMaxLength(15);
+                entity.Property(e => e.Email).HasColumnName("email").HasMaxLength(75);
+                entity.Property(e => e.Description).HasColumnName("description").HasMaxLength(100);
+                entity.Property(e => e.Service).HasColumnName("service");
+                entity.Property(e => e.Status).HasColumnName("request_status");
+
+                entity.HasOne(d => d.ServiceNavigation).WithMany(p => p.Requests).HasForeignKey(d => d.Service).HasConstraintName("FK_request_trade_info");
+                entity.HasOne(d => d.StatusNavigation).WithMany(p => p.Requests).HasForeignKey(d => d.Status).HasConstraintName("FK_request_status");
             });
 
             modelBuilder.Entity<Status>(entity =>
@@ -488,5 +511,7 @@ namespace RealEstateAgencyAPI.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<RealEstateAgencyAPI.Models.Request> Request { get; set; }
     }
 }

@@ -23,5 +23,6 @@ namespace RealEstateAgencyAPI.Models
         public virtual ICollection<Estate> Estates { get; set; }
         public virtual ICollection<Meeting> Meetings { get; set; }
         public virtual ICollection<Offer> Offers { get; set; }
+        public virtual ICollection<Request> Requests { get; set; }
     }
 }
