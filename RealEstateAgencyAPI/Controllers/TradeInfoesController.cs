@@ -41,6 +41,20 @@ namespace RealEstateAgencyAPI.Controllers
             return tradeInfo;
         }
 
+        //GET: api/TradeInfoes/domain#tradeArea
+        [HttpGet("domain/{domain}")]
+        public List<TradeInfo> GetTradeInfoByDomain(string domain)
+        {
+            var tradeInfos = _context.TradeInfos.Where(x => x.Domain == domain).Select(x => x).Distinct();
+
+            if(tradeInfos == null)
+            {
+                return ((IQueryable<TradeInfo>)NotFound()).ToList();
+            }
+
+            return tradeInfos.ToList();
+        }
+
         // PUT: api/TradeInfoes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

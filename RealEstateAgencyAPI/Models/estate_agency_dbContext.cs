@@ -26,6 +26,7 @@ namespace RealEstateAgencyAPI.Models
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<TradeInfo> TradeInfos { get; set; }
+        public virtual DbSet<OfferPreview> OfferPreviews { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -146,6 +147,12 @@ namespace RealEstateAgencyAPI.Models
 
                 entity.Property(e => e.Address).HasColumnName("address");
 
+                entity.Property(e => e.AdministrationTax).HasColumnName("administration_tax").HasColumnType("decimal(8,2)");
+
+                entity.Property(e => e.HasRent).HasColumnName("has_rent").HasColumnType("bit(1)");
+
+                entity.Property(e => e.Rent).HasColumnName("rent").HasColumnType("decimal(8,2)");
+
                 entity.Property(e => e.BuildDate)
                     .HasColumnType("year")
                     .HasColumnName("build_date");
@@ -193,6 +200,10 @@ namespace RealEstateAgencyAPI.Models
                 entity.Property(e => e.HasBalcony)
                     .HasColumnType("bit(1)")
                     .HasColumnName("has_balcony");
+
+                entity.Property(e => e.MainPhotoUrl)
+                    .HasMaxLength(150)
+                    .HasColumnName("main_photo_url");
 
                 entity.Property(e => e.NearCenter)
                     .HasColumnType("bit(1)")
@@ -356,6 +367,10 @@ namespace RealEstateAgencyAPI.Models
 
                 entity.Property(e => e.Estate).HasColumnName("estate");
 
+                entity.Property(e => e.PriceForMeter).HasColumnName("price_column_name").HasColumnType("decimal(8,2)");
+                entity.Property(e => e.Name).HasColumnName("name").HasColumnType("varchar(150)");
+                entity.Property(e => e.OfferType).HasColumnName("offer_type").HasColumnType("varchar(150)");
+
                 entity.Property(e => e.OfferStatus)
                     .HasColumnType("tinyint")
                     .HasColumnName("offer_status");
@@ -363,6 +378,10 @@ namespace RealEstateAgencyAPI.Models
                 entity.Property(e => e.Price)
                     .HasColumnType("decimal(12,2)")
                     .HasColumnName("price");
+
+                entity.Property(e => e.PriceForMeter)
+                    .HasColumnType("decimal(8,2)")
+                    .HasColumnName("price_for_meter");
 
                 entity.Property(e => e.Promoted)
                     .HasColumnType("bit(1)")
@@ -505,6 +524,22 @@ namespace RealEstateAgencyAPI.Models
                     .IsRequired()
                     .HasMaxLength(3)
                     .HasColumnName("short_name");
+            });
+
+            modelBuilder.Entity<OfferPreview>(view =>
+            {
+                view.HasNoKey();
+                view.ToView("offer_preview_view");
+                view.Property(v => v.Area).HasColumnName("property_area");
+                view.Property(v => v.Name).HasColumnName("offer_name");
+                view.Property(v => v.NumberOfRooms).HasColumnName("number_of_rooms");
+                view.Property(v => v.Price).HasColumnName("price");
+                view.Property(v => v.PriceForMeter).HasColumnName("price_for_meter");
+                view.Property(v => v.OfferType).HasColumnName("offer_type");
+                view.Property(v => v.Street).HasColumnName("street");
+                view.Property(v => v.PropertyType).HasColumnName("name");
+                view.Property(v => v.MainPhotoUrl).HasColumnName("main_photo_url");
+                view.Property(v => v.OfferStatus).HasColumnName("offer_status");
             });
 
             OnModelCreatingPartial(modelBuilder);

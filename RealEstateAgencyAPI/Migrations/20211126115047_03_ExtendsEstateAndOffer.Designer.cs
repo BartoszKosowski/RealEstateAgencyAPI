@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstateAgencyAPI.Models;
 
 namespace RealEstateAgencyAPI.Migrations
 {
     [DbContext(typeof(estate_agency_dbContext))]
-    partial class estate_agency_dbContextModelSnapshot : ModelSnapshot
+    [Migration("20211126115047_03_ExtendsEstateAndOffer")]
+    partial class _03_ExtendsEstateAndOffer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -358,10 +360,6 @@ namespace RealEstateAgencyAPI.Migrations
                     b.Property<byte?>("OfferStatus")
                         .HasColumnType("tinyint")
                         .HasColumnName("offer_status");
-
-                    b.Property<string>("OfferType")
-                        .HasColumnType("varchar(150)")
-                        .HasColumnName("offer_type");
 
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(12,2)")

@@ -17,6 +17,9 @@ namespace RealEstateAgencyAPI.Models
         public int? Views { get; set; }
         public bool? Promoted { get; set; }
         public string Details { get; set; }
+        public string Name { get; set; }
+        public decimal? PriceForMeter { get; set; }
+        public string OfferType { get; set; }
 
         public virtual Agent AgentNavigation { get; set; }
         public virtual TradeInfo AreaNavigation { get; set; }

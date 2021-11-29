@@ -41,6 +41,10 @@ namespace RealEstateAgencyAPI.Models
         public bool? HasBalcony { get; set; }
         public string TypeOfBathroom { get; set; }
         public bool? Furnishings { get; set; }
+        public string MainPhotoUrl { get; set; }
+        public bool? HasRent { get; set; }
+        public decimal? Rent { get; set; }
+        public decimal? AdministrationTax { get; set; }
 
         public virtual Address AddressNavigation { get; set; }
         public virtual Status PropertyStatusNavigation { get; set; }
