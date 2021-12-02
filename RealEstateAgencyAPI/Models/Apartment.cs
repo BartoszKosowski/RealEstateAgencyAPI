@@ -24,7 +24,7 @@ namespace RealEstateAgencyAPI.Models
         public bool? HasBathroom { get; set; }
         public bool? ParkingSpace { get; set; }
         public string Heating { get; set; }
-        public string InsideStyle { get; set; }
+        public string InsideDesign { get; set; }
         public string KitchenEquipment { get; set; }
         public string BathroomEquipment { get; set; }
         public string BuildingName { get; set; }

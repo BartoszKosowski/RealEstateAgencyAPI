@@ -26,8 +26,10 @@ namespace RealEstateAgencyAPI.Models
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<TradeInfo> TradeInfos { get; set; }
-        public virtual DbSet<OfferPreview> OfferPreviews { get; set; }
         public virtual DbSet<Apartment> Apartments { get; set; }
+        public virtual DbSet<Request> Request { get; set; }
+        public virtual DbSet<ApartmentOfferPreview> ApartmentOfferPreviews { get; set; }
+        public virtual DbSet<EstateOfferPreview> EstateOfferPreviews { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -188,7 +190,7 @@ namespace RealEstateAgencyAPI.Models
                 entity.Property(e => e.HasBalcony).HasColumnType("tinyint(1)").HasColumnName("has_balcony");
                 entity.Property(e => e.HasBathroom).HasColumnType("tinyint(1)").HasColumnName("has_bathroom");
                 entity.Property(e => e.Heating).HasColumnType("varchar(100)").HasColumnName("heating");
-                entity.Property(e => e.InsideStyle).HasColumnType("varchar(100)").HasColumnName("inside_design");
+                entity.Property(e => e.InsideDesign).HasColumnType("varchar(100)").HasColumnName("inside_design");
                 entity.Property(e => e.KitchenEquipment).HasColumnType("varchar(500)").HasColumnName("kitchen_equipment");
                 entity.Property(e => e.MainPhotoUrl).HasColumnType("varchar(300)").HasColumnName("main_photo_url");
 
@@ -241,7 +243,7 @@ namespace RealEstateAgencyAPI.Models
                     .WithMany(p => p.Apartments)
                     .HasForeignKey(d => d.PropertyState)
                     .HasConstraintName("FK_apartment_status");
-            });
+            });            
 
             modelBuilder.Entity<Estate>(entity =>
             {
@@ -511,6 +513,7 @@ namespace RealEstateAgencyAPI.Models
                 entity.Property(e => e.HasRent).HasColumnType("tinyint(1)").HasColumnName("has_rent");
                 entity.Property(e => e.RentValue).HasColumnType("decimal(7,2)").HasColumnName("rent_value");
                 entity.Property(e => e.Apartment).HasColumnName("apartment");
+                entity.Property(e => e.IsEstate).HasColumnType("tinyint(1)").HasColumnName("is_estate");
 
                 entity.HasOne(d => d.AgentNavigation)
                     .WithMany(p => p.Offers)
@@ -657,11 +660,29 @@ namespace RealEstateAgencyAPI.Models
                     .HasColumnName("short_name");
             });
 
-            modelBuilder.Entity<OfferPreview>(view =>
+            modelBuilder.Entity<ApartmentOfferPreview>(view =>
             {
                 view.HasNoKey();
-                view.ToView("offer_preview_view");
+                view.ToView("apartment_offer_preview_view");
                 view.Property(v => v.Area).HasColumnName("property_area");
+                view.Property(v => v.IdOffer).HasColumnName("id_offer");
+                view.Property(v => v.Name).HasColumnName("offer_name");
+                view.Property(v => v.NumberOfRooms).HasColumnName("number_of_rooms");
+                view.Property(v => v.Price).HasColumnName("price");
+                view.Property(v => v.PriceForMeter).HasColumnName("price_for_meter");
+                view.Property(v => v.OfferType).HasColumnName("offer_type");
+                view.Property(v => v.Street).HasColumnName("street");
+                view.Property(v => v.InsideDesign).HasColumnName("inside_design");
+                view.Property(v => v.MainPhotoUrl).HasColumnName("main_photo_url");
+                view.Property(v => v.OfferStatus).HasColumnName("offer_status");
+            });
+
+            modelBuilder.Entity<EstateOfferPreview>(view =>
+            {
+                view.HasNoKey();
+                view.ToView("estate_offer_preview_view");
+                view.Property(v => v.Area).HasColumnName("property_area");
+                view.Property(v => v.IdOffer).HasColumnName("id_offer");
                 view.Property(v => v.Name).HasColumnName("offer_name");
                 view.Property(v => v.NumberOfRooms).HasColumnName("number_of_rooms");
                 view.Property(v => v.Price).HasColumnName("price");
@@ -670,14 +691,12 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.Street).HasColumnName("street");
                 view.Property(v => v.PropertyType).HasColumnName("name");
                 view.Property(v => v.MainPhotoUrl).HasColumnName("main_photo_url");
-                view.Property(v => v.OfferStatus).HasColumnName("offer_status");
+                view.Property(v => v.OfferStatus).HasColumnName("offer_status");              
             });
 
             OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-        public DbSet<RealEstateAgencyAPI.Models.Request> Request { get; set; }
     }
 }

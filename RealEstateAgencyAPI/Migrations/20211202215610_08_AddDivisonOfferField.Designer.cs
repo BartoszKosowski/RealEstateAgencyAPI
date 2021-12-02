@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstateAgencyAPI.Models;
 
 namespace RealEstateAgencyAPI.Migrations
 {
     [DbContext(typeof(estate_agency_dbContext))]
-    partial class estate_agency_dbContextModelSnapshot : ModelSnapshot
+    [Migration("20211202215610_08_AddDivisonOfferField")]
+    partial class _08_AddDivisonOfferField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -287,55 +289,6 @@ namespace RealEstateAgencyAPI.Migrations
                     b.ToTable("apartments");
                 });
 
-            modelBuilder.Entity("RealEstateAgencyAPI.Models.ApartmentOfferPreview", b =>
-                {
-                    b.Property<decimal?>("Area")
-                        .HasColumnType("decimal(18, 2)")
-                        .HasColumnName("property_area");
-
-                    b.Property<int>("IdOffer")
-                        .HasColumnType("int")
-                        .HasColumnName("id_offer");
-
-                    b.Property<string>("MainPhotoUrl")
-                        .HasColumnType("text")
-                        .HasColumnName("main_photo_url");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("offer_name");
-
-                    b.Property<int?>("NumberOfRooms")
-                        .HasColumnType("int")
-                        .HasColumnName("number_of_rooms");
-
-                    b.Property<byte?>("OfferStatus")
-                        .HasColumnType("tinyint unsigned")
-                        .HasColumnName("offer_status");
-
-                    b.Property<string>("OfferType")
-                        .HasColumnType("text")
-                        .HasColumnName("offer_type");
-
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(18, 2)")
-                        .HasColumnName("price");
-
-                    b.Property<decimal?>("PriceForMeter")
-                        .HasColumnType("decimal(18, 2)")
-                        .HasColumnName("price_for_meter");
-
-                    b.Property<string>("PropertyType")
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("text")
-                        .HasColumnName("street");
-
-                    b.ToView("apartment_offer_preview_view");
-                });
-
             modelBuilder.Entity("RealEstateAgencyAPI.Models.Estate", b =>
                 {
                     b.Property<int>("IdEstate")
@@ -507,55 +460,6 @@ namespace RealEstateAgencyAPI.Migrations
                     b.ToTable("estates");
                 });
 
-            modelBuilder.Entity("RealEstateAgencyAPI.Models.EstateOfferPreview", b =>
-                {
-                    b.Property<decimal?>("Area")
-                        .HasColumnType("decimal(18, 2)")
-                        .HasColumnName("property_area");
-
-                    b.Property<int>("IdOffer")
-                        .HasColumnType("int")
-                        .HasColumnName("id_offer");
-
-                    b.Property<string>("MainPhotoUrl")
-                        .HasColumnType("text")
-                        .HasColumnName("main_photo_url");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("offer_name");
-
-                    b.Property<int?>("NumberOfRooms")
-                        .HasColumnType("int")
-                        .HasColumnName("number_of_rooms");
-
-                    b.Property<byte?>("OfferStatus")
-                        .HasColumnType("tinyint unsigned")
-                        .HasColumnName("offer_status");
-
-                    b.Property<string>("OfferType")
-                        .HasColumnType("text")
-                        .HasColumnName("offer_type");
-
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(18, 2)")
-                        .HasColumnName("price");
-
-                    b.Property<decimal?>("PriceForMeter")
-                        .HasColumnType("decimal(18, 2)")
-                        .HasColumnName("price_for_meter");
-
-                    b.Property<string>("PropertyType")
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("text")
-                        .HasColumnName("street");
-
-                    b.ToView("estate_offer_preview_view");
-                });
-
             modelBuilder.Entity("RealEstateAgencyAPI.Models.Meeting", b =>
                 {
                     b.Property<int>("IdMeetings")
@@ -707,6 +611,55 @@ namespace RealEstateAgencyAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("offers");
+                });
+
+            modelBuilder.Entity("RealEstateAgencyAPI.Models.OfferPreview", b =>
+                {
+                    b.Property<decimal?>("Area")
+                        .HasColumnType("decimal(18, 2)")
+                        .HasColumnName("property_area");
+
+                    b.Property<int>("IdOffer")
+                        .HasColumnType("int")
+                        .HasColumnName("id_offer");
+
+                    b.Property<string>("MainPhotoUrl")
+                        .HasColumnType("text")
+                        .HasColumnName("main_photo_url");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("offer_name");
+
+                    b.Property<int?>("NumberOfRooms")
+                        .HasColumnType("int")
+                        .HasColumnName("number_of_rooms");
+
+                    b.Property<byte?>("OfferStatus")
+                        .HasColumnType("tinyint unsigned")
+                        .HasColumnName("offer_status");
+
+                    b.Property<string>("OfferType")
+                        .HasColumnType("text")
+                        .HasColumnName("offer_type");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18, 2)")
+                        .HasColumnName("price");
+
+                    b.Property<decimal?>("PriceForMeter")
+                        .HasColumnType("decimal(18, 2)")
+                        .HasColumnName("price_for_meter");
+
+                    b.Property<string>("PropertyType")
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("text")
+                        .HasColumnName("street");
+
+                    b.ToView("offer_preview_view");
                 });
 
             modelBuilder.Entity("RealEstateAgencyAPI.Models.Photo", b =>

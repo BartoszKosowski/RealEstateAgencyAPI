@@ -23,6 +23,7 @@ namespace RealEstateAgencyAPI.Models
         public int? Apartment { get; set; }
         public bool? HasRent { get; set; }
         public decimal? RentValue { get; set; }
+        public bool? IsEstate { get; set; }
 
         public virtual Agent AgentNavigation { get; set; }
         public virtual TradeInfo AreaNavigation { get; set; }

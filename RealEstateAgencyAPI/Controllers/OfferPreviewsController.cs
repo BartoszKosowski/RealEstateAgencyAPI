@@ -22,9 +22,9 @@ namespace RealEstateAgencyAPI.Controllers
 
         //GET: api/OfferPreviews
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OfferPreview>>> GetOfferPreviews()
+        public async Task<ActionResult<IEnumerable<EstateOfferPreview>>> GetOfferPreviews()
         {
-            return await _context.OfferPreviews.ToListAsync();
+            return await _context.EstateOfferPreviews.ToListAsync();
         }
     }
 }

@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace RealEstateAgencyAPI.Models
 {
-    public class OfferPreview
+    public class EstateOfferPreview
     {
+        public int IdOffer { get; }
         public string Name { get; }
         public string Street { get; }
         public string City { get; }
@@ -18,6 +19,5 @@ namespace RealEstateAgencyAPI.Models
         public string PropertyType { get; }
         public string MainPhotoUrl { get; }
         public byte? OfferStatus { get; }
-
     }
 }
