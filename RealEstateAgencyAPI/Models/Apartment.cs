@@ -29,7 +29,7 @@ namespace RealEstateAgencyAPI.Models
         public string BathroomEquipment { get; set; }
         public string BuildingName { get; set; }
         public int? BuildYear { get; set; }
-        public byte? BuildingType { get; set; }
+        public string BuildingType { get; set; }
         public byte? NumberOfFloors { get; set; }
         public string MainPhotoUrl { get; set; }
 
@@ -52,7 +52,6 @@ namespace RealEstateAgencyAPI.Models
         public string OtherDetails { get; set; }
 
         public virtual Address AddressNavigation { get; set; }
-        public virtual TradeInfo TradeInfoNavigation { get; set; }
         public virtual Status StatusNavigation { get; set; }
         public virtual ICollection<Offer> Offers { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }

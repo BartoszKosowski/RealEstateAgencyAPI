@@ -135,6 +135,114 @@ namespace RealEstateAgencyAPI.Models
                     .HasConstraintName("FK_agent_trade_info");
             });
 
+            modelBuilder.Entity<Apartment>(entity =>
+            {
+                entity.HasKey(e => e.IdApartment).HasName("PRIMARY");
+
+                entity.ToTable("apartments");
+
+                entity.HasIndex(e => e.IdApartment, "id_apartment_UNIQUE").IsUnique();
+                entity.HasIndex(e => e.PropertyState, "FK_apartment_state_idx");
+                entity.HasIndex(e => e.BuildingType, "FK_apartment_trade_info_idx");
+
+                entity.Property(e => e.Address).HasColumnName("address");
+                entity.Property(e => e.BathroomEquipment).HasColumnType("varchar(500)").HasColumnName("bathroom_equipment");
+                entity.Property(e => e.BuildingName).HasColumnType("varchar(150)").HasColumnName("building_name");
+                entity.Property(e => e.BuildingType).HasColumnType("varchar(100)").HasColumnName("building_type");
+                entity.Property(e => e.BuildYear).HasColumnType("int").HasColumnName("build_year");
+
+                entity.Property(e => e.DistanceToCenter)
+                    .HasColumnType("decimal(3,1)")
+                    .HasColumnName("distance_to_center");
+
+                entity.Property(e => e.DistanceToCoast)
+                    .HasColumnType("decimal(3,1)")
+                    .HasColumnName("distance_to_coast");
+
+                entity.Property(e => e.DistanceToForest)
+                    .HasColumnType("decimal(3,1)")
+                    .HasColumnName("distance_to_forest");
+
+                entity.Property(e => e.DistanceToHighway)
+                    .HasColumnType("decimal(3,1)")
+                    .HasColumnName("distance_to_highway");
+
+                entity.Property(e => e.DistanceToLake)
+                    .HasColumnType("decimal(3,1)")
+                    .HasColumnName("distance_to_lake");
+
+                entity.Property(e => e.DistanceToMall)
+                    .HasColumnType("decimal(3,1)")
+                    .HasColumnName("distance_to_mall");
+
+                entity.Property(e => e.DistanceToMountains)
+                    .HasColumnType("decimal(3,1)")
+                    .HasColumnName("distance_to_mountains");
+
+                entity.Property(e => e.DistanceToRiver)
+                    .HasColumnType("decimal(3,1)")
+                    .HasColumnName("distance_to_river");
+
+                entity.Property(e => e.FloorNumber).HasColumnType("tinyint").HasColumnName("floor_number");
+                entity.Property(e => e.Furnishings).HasColumnType("tinyint(1)").HasColumnName("furnishings");
+                entity.Property(e => e.HasBalcony).HasColumnType("tinyint(1)").HasColumnName("has_balcony");
+                entity.Property(e => e.HasBathroom).HasColumnType("tinyint(1)").HasColumnName("has_bathroom");
+                entity.Property(e => e.Heating).HasColumnType("varchar(100)").HasColumnName("heating");
+                entity.Property(e => e.InsideStyle).HasColumnType("varchar(100)").HasColumnName("inside_design");
+                entity.Property(e => e.KitchenEquipment).HasColumnType("varchar(500)").HasColumnName("kitchen_equipment");
+                entity.Property(e => e.MainPhotoUrl).HasColumnType("varchar(300)").HasColumnName("main_photo_url");
+
+                entity.Property(e => e.NearCenter)
+                    .HasColumnType("bit(1)")
+                    .HasColumnName("near_center");
+
+                entity.Property(e => e.NearCoast)
+                    .HasColumnType("bit(1)")
+                    .HasColumnName("near_coast");
+
+                entity.Property(e => e.NearForest)
+                    .HasColumnType("bit(1)")
+                    .HasColumnName("near_forest");
+
+                entity.Property(e => e.NearHighway)
+                    .HasColumnType("bit(1)")
+                    .HasColumnName("near_highway");
+
+                entity.Property(e => e.NearLake)
+                    .HasColumnType("bit(1)")
+                    .HasColumnName("near_lake");
+
+                entity.Property(e => e.NearMall)
+                    .HasColumnType("bit(1)")
+                    .HasColumnName("near_mall");
+
+                entity.Property(e => e.NearMountains)
+                    .HasColumnType("bit(1)")
+                    .HasColumnName("near_mountains");
+
+                entity.Property(e => e.NearRiver)
+                    .HasColumnType("bit(1)")
+                    .HasColumnName("near_river");
+
+
+                entity.Property(e => e.NumberOfFloors).HasColumnType("tinyint").HasColumnName("number_of_floors");
+                entity.Property(e => e.NumberOfRooms).HasColumnType("tinyint").HasColumnName("number_of_rooms");
+                entity.Property(e => e.OtherDetails).HasMaxLength(5000).HasColumnName("other_details");
+                entity.Property(e => e.ParkingSpace).HasColumnType("tinyint(1)").HasColumnName("parking_space");
+                entity.Property(e => e.PropertyArea).HasColumnType("decimal(7,2)").HasColumnName("property_area");
+                entity.Property(e => e.PropertyState).HasColumnType("tinyint").HasColumnName("property_state");
+
+                entity.HasOne(d => d.AddressNavigation)
+                    .WithMany(p => p.Apartments)
+                    .HasForeignKey(d => d.Address)
+                    .HasConstraintName("FK_apartment_address");
+
+                entity.HasOne(d => d.StatusNavigation)
+                    .WithMany(p => p.Apartments)
+                    .HasForeignKey(d => d.PropertyState)
+                    .HasConstraintName("FK_apartment_status");
+            });
+
             modelBuilder.Entity<Estate>(entity =>
             {
                 entity.HasKey(e => e.IdEstate)
@@ -400,6 +508,10 @@ namespace RealEstateAgencyAPI.Models
 
                 entity.Property(e => e.Views).HasColumnName("views");
 
+                entity.Property(e => e.HasRent).HasColumnType("tinyint(1)").HasColumnName("has_rent");
+                entity.Property(e => e.RentValue).HasColumnType("decimal(7,2)").HasColumnName("rent_value");
+                entity.Property(e => e.Apartment).HasColumnName("apartment");
+
                 entity.HasOne(d => d.AgentNavigation)
                     .WithMany(p => p.Offers)
                     .HasForeignKey(d => d.Agent)
@@ -419,6 +531,11 @@ namespace RealEstateAgencyAPI.Models
                     .WithMany(p => p.Offers)
                     .HasForeignKey(d => d.OfferStatus)
                     .HasConstraintName("FK_offer_status");
+
+                entity.HasOne(d => d.ApartmentNavigation)
+                    .WithMany(p => p.Offers)
+                    .HasForeignKey(d => d.Apartment)
+                    .HasConstraintName("FK_offer_apartment");
             });
 
             modelBuilder.Entity<Photo>(entity =>
@@ -437,6 +554,8 @@ namespace RealEstateAgencyAPI.Models
 
                 entity.Property(e => e.Estate).HasColumnName("estate");
 
+                entity.Property(e => e.Apartment).HasColumnName("apartment");
+
                 entity.Property(e => e.PhotoUrl)
                     .HasMaxLength(100)
                     .HasColumnName("photo_url");
@@ -446,6 +565,11 @@ namespace RealEstateAgencyAPI.Models
                     .WithMany(p => p.Photos)
                     .HasForeignKey(d => d.Estate)
                     .HasConstraintName("FK_photo_estate");
+
+                entity.HasOne(d => d.ApartmentNavigation)
+                    .WithMany(p => p.Photos)
+                    .HasForeignKey(d => d.Apartment)
+                    .HasConstraintName("FK_photo_apartment");
             });
 
             modelBuilder.Entity<Request>(entity =>

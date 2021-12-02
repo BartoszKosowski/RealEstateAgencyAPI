@@ -9,6 +9,7 @@ namespace RealEstateAgencyAPI.Models
     {
         public int IdPhoto { get; set; }
         public int? Estate { get; set; }
+        public int? Apartment { get; set; }
         public string PhotoUrl { get; set; }
 
         public virtual Estate EstateNavigation { get; set; }

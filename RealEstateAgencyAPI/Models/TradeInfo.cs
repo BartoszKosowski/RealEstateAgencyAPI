@@ -12,7 +12,6 @@ namespace RealEstateAgencyAPI.Models
             Agents = new HashSet<Agent>();
             Estates = new HashSet<Estate>();
             Offers = new HashSet<Offer>();
-            Apartments = new HashSet<Apartment>();
         }
 
         public byte IdInfo { get; set; }
@@ -26,6 +25,5 @@ namespace RealEstateAgencyAPI.Models
         public virtual ICollection<Estate> Estates { get; set; }
         public virtual ICollection<Offer> Offers { get; set; }
         public virtual ICollection<Request> Requests { get; set; }
-        public virtual ICollection<Apartment> Apartments { get; set; }
     }
 }
