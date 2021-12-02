@@ -19,8 +19,10 @@ namespace RealEstateAgencyAPI.Models
         public string ApartmentNumber { get; set; }
         public string City { get; set; }
         public string ZipCode { get; set; }
+        public string GoogleMapsUrl { get; set; }
 
         public virtual ICollection<Estate> Estates { get; set; }
         public virtual ICollection<Meeting> Meetings { get; set; }
+        public virtual ICollection<Apartment> Apartments { get; set; }
     }
 }

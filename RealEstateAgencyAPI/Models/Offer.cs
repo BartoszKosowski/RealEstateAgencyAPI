@@ -20,10 +20,14 @@ namespace RealEstateAgencyAPI.Models
         public string Name { get; set; }
         public decimal? PriceForMeter { get; set; }
         public string OfferType { get; set; }
+        public int? Apartment { get; set; }
+        public bool? HasRent { get; set; }
+        public decimal? RentValue { get; set; }
 
         public virtual Agent AgentNavigation { get; set; }
         public virtual TradeInfo AreaNavigation { get; set; }
         public virtual Estate EstateNavigation { get; set; }
         public virtual Status OfferStatusNavigation { get; set; }
+        public virtual Apartment ApartmentNavigation { get; set; }
     }
 }

@@ -12,5 +12,6 @@ namespace RealEstateAgencyAPI.Models
         public string PhotoUrl { get; set; }
 
         public virtual Estate EstateNavigation { get; set; }
+        public virtual Apartment ApartmentNavigation { get; set; }
     }
 }

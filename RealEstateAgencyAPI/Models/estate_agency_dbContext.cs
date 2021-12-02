@@ -27,6 +27,7 @@ namespace RealEstateAgencyAPI.Models
         public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<TradeInfo> TradeInfos { get; set; }
         public virtual DbSet<OfferPreview> OfferPreviews { get; set; }
+        public virtual DbSet<Apartment> Apartments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -73,6 +74,10 @@ namespace RealEstateAgencyAPI.Models
                     .IsRequired()
                     .HasMaxLength(6)
                     .HasColumnName("zip_code");
+
+                entity.Property(e => e.GoogleMapsUrl)
+                    .HasMaxLength(500)
+                    .HasColumnName("google_maps_url");
             });
 
             modelBuilder.Entity<Agent>(entity =>
@@ -146,12 +151,6 @@ namespace RealEstateAgencyAPI.Models
                 entity.Property(e => e.IdEstate).HasColumnName("id_estate");
 
                 entity.Property(e => e.Address).HasColumnName("address");
-
-                entity.Property(e => e.AdministrationTax).HasColumnName("administration_tax").HasColumnType("decimal(8,2)");
-
-                entity.Property(e => e.HasRent).HasColumnName("has_rent").HasColumnType("bit(1)");
-
-                entity.Property(e => e.Rent).HasColumnName("rent").HasColumnType("decimal(8,2)");
 
                 entity.Property(e => e.BuildDate)
                     .HasColumnType("year")
@@ -253,9 +252,17 @@ namespace RealEstateAgencyAPI.Models
                     .HasColumnType("tinyint")
                     .HasColumnName("property_type");
 
-                entity.Property(e => e.TypeOfBathroom)
-                    .HasMaxLength(45)
-                    .HasColumnName("type_of_bathroom");
+
+                entity.Property(e => e.RoofType).HasColumnType("varchar(75)").HasColumnName("roof_type");
+                entity.Property(e => e.Electricity).HasColumnType("tinyint(1)").HasColumnName("electricity");
+                entity.Property(e => e.WaterConnection).HasColumnType("tinyint(1)").HasColumnName("water_connection");
+                entity.Property(e => e.Basement).HasColumnType("tinyint(1)").HasColumnName("basement");
+                entity.Property(e => e.Garage).HasColumnType("tinyint(1)").HasColumnName("garage");
+                entity.Property(e => e.Plot).HasColumnType("decimal(7,2)").HasColumnName("plot");
+                entity.Property(e => e.Fence).HasColumnType("tinyint(1)").HasColumnName("fence");
+                entity.Property(e => e.Heating).HasMaxLength(100).HasColumnName("heating");
+                entity.Property(e => e.Sewers).HasColumnType("tinyint(1)").HasColumnName("sewers");
+                entity.Property(e => e.GasInstallation).HasColumnType("tinyint(1)").HasColumnName("electricity");
 
                 entity.HasOne(d => d.AddressNavigation)
                     .WithMany(p => p.Estates)
