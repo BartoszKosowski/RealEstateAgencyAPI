@@ -19,5 +19,7 @@ namespace RealEstateAgencyAPI.Models
         public string InsideDesign { get; }
         public string MainPhotoUrl { get; }
         public byte? OfferStatus { get; }
+        public bool? HasRent { get; }
+        public bool? RentValue { get; }
     }
 }

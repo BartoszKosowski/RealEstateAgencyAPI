@@ -665,7 +665,8 @@ namespace RealEstateAgencyAPI.Models
                 view.HasNoKey();
                 view.ToView("apartment_offer_preview_view");
                 view.Property(v => v.Area).HasColumnName("property_area");
-                view.Property(v => v.IdOffer).HasColumnName("id_offer");
+                view.Property(v => v.City).HasColumnName("city");
+                view.Property(v => v.IdOffer).HasColumnName("id_offers");
                 view.Property(v => v.Name).HasColumnName("offer_name");
                 view.Property(v => v.NumberOfRooms).HasColumnName("number_of_rooms");
                 view.Property(v => v.Price).HasColumnName("price");
@@ -675,6 +676,8 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.InsideDesign).HasColumnName("inside_design");
                 view.Property(v => v.MainPhotoUrl).HasColumnName("main_photo_url");
                 view.Property(v => v.OfferStatus).HasColumnName("offer_status");
+                view.Property(v => v.HasRent).HasColumnName("has_rent");
+                view.Property(v => v.RentValue).HasColumnName("rent_value");
             });
 
             modelBuilder.Entity<EstateOfferPreview>(view =>
@@ -682,7 +685,8 @@ namespace RealEstateAgencyAPI.Models
                 view.HasNoKey();
                 view.ToView("estate_offer_preview_view");
                 view.Property(v => v.Area).HasColumnName("property_area");
-                view.Property(v => v.IdOffer).HasColumnName("id_offer");
+                view.Property(v => v.City).HasColumnName("city");
+                view.Property(v => v.IdOffer).HasColumnName("id_offers");
                 view.Property(v => v.Name).HasColumnName("offer_name");
                 view.Property(v => v.NumberOfRooms).HasColumnName("number_of_rooms");
                 view.Property(v => v.Price).HasColumnName("price");
@@ -691,7 +695,9 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.Street).HasColumnName("street");
                 view.Property(v => v.PropertyType).HasColumnName("name");
                 view.Property(v => v.MainPhotoUrl).HasColumnName("main_photo_url");
-                view.Property(v => v.OfferStatus).HasColumnName("offer_status");              
+                view.Property(v => v.OfferStatus).HasColumnName("offer_status");
+                view.Property(v => v.HasRent).HasColumnName("has_rent");
+                view.Property(v => v.RentValue).HasColumnName("rent_value");
             });
 
             OnModelCreatingPartial(modelBuilder);

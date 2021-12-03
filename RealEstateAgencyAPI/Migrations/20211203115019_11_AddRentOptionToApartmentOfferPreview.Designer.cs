@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstateAgencyAPI.Models;
 
 namespace RealEstateAgencyAPI.Migrations
 {
     [DbContext(typeof(estate_agency_dbContext))]
-    partial class estate_agency_dbContextModelSnapshot : ModelSnapshot
+    [Migration("20211203115019_11_AddRentOptionToApartmentOfferPreview")]
+    partial class _11_AddRentOptionToApartmentOfferPreview
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -521,10 +523,6 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnType("decimal(18, 2)")
                         .HasColumnName("property_area");
 
-                    b.Property<bool?>("HasRent")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("has_rent");
-
                     b.Property<int>("IdOffer")
                         .HasColumnType("int")
                         .HasColumnName("id_offer");
@@ -560,10 +558,6 @@ namespace RealEstateAgencyAPI.Migrations
                     b.Property<string>("PropertyType")
                         .HasColumnType("text")
                         .HasColumnName("name");
-
-                    b.Property<bool?>("RentValue")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("rent_value");
 
                     b.Property<string>("Street")
                         .HasColumnType("text")
