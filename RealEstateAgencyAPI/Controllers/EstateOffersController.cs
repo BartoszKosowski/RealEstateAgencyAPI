@@ -28,16 +28,18 @@ namespace RealEstateAgencyAPI.Controllers
         }
 
         [HttpGet("{id_offers}")]
-        public async Task<ActionResult<EstateOffer>> GetEstateOffer(int id_offers)
+        public ActionResult<EstateOffer> GetEstateOffer(int id_offers)
         {
-            var estateOffer = await _context.EstateOffers.FindAsync(id_offers);
+            var estateOffer = from offer in _context.EstateOffers
+                              where offer.IdOffers == id_offers
+                              select offer;
 
             if (estateOffer == null)
             {
                 return NotFound();
             }
 
-            return estateOffer;
+            return Ok(estateOffer);
         }
     }
 }
