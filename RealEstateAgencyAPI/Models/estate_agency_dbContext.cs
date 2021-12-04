@@ -30,6 +30,7 @@ namespace RealEstateAgencyAPI.Models
         public virtual DbSet<Request> Request { get; set; }
         public virtual DbSet<ApartmentOfferPreview> ApartmentOfferPreviews { get; set; }
         public virtual DbSet<EstateOfferPreview> EstateOfferPreviews { get; set; }
+        public virtual DbSet<ApartmentOffer> ApartmentOffers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -678,6 +679,55 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.OfferStatus).HasColumnName("offer_status");
                 view.Property(v => v.HasRent).HasColumnName("has_rent");
                 view.Property(v => v.RentValue).HasColumnName("rent_value");
+            });
+
+            modelBuilder.Entity<ApartmentOffer>(view =>
+            {
+                view.HasNoKey();
+                view.ToView("apartment_offer_view");
+                view.Property(v => v.Agent).HasColumnName("agent");
+                view.Property(v => v.ApartmentNumber).HasColumnName("apartment_number");
+                view.Property(v => v.BathroomEquipment).HasColumnName("bathroom_equipment");
+                view.Property(v => v.BuildingName).HasColumnName("building_name");
+                view.Property(v => v.BuildingType).HasColumnName("building_type");
+                view.Property(v => v.BuildYear).HasColumnName("build_year");
+                view.Property(v => v.City).HasColumnName("city");
+                view.Property(v => v.Details).HasColumnName("details");
+                view.Property(v => v.DistanceToCenter).HasColumnName("distance_to_center");
+                view.Property(v => v.DistanceToCoast).HasColumnName("distance_to_coast");
+                view.Property(v => v.DistanceToForest).HasColumnName("distance_to_forest");
+                view.Property(v => v.DistanceToHighway).HasColumnName("distance_to_highway");
+                view.Property(v => v.DistanceToLake).HasColumnName("distance_to_lake");
+                view.Property(v => v.DistanceToMall).HasColumnName("distance_to_mall");
+                view.Property(v => v.DistanceToMountains).HasColumnName("distance_to_mountains");
+                view.Property(v => v.DistanceToRiver).HasColumnName("distance_to_river");
+                view.Property(v => v.EstateNumber).HasColumnName("estate_number");
+                view.Property(v => v.FloorNumber).HasColumnName("floor_number");
+                view.Property(v => v.Furnishings).HasColumnName("furnishings");
+                view.Property(v => v.GoogleMapsUrl).HasColumnName("google_maps_url");
+                view.Property(v => v.HasBalcony).HasColumnName("has_balcony");
+                view.Property(v => v.HasBathroom).HasColumnName("has_bathroom");
+                view.Property(v => v.HasRent).HasColumnName("has_rent");
+                view.Property(v => v.Heating).HasColumnName("heating");
+                view.Property(v => v.IdOffers).HasColumnName("id_offers");
+                view.Property(v => v.InsideDesign).HasColumnName("inside_design");
+                view.Property(v => v.KitchenEquipment).HasColumnName("kitchen_equipment");
+                view.Property(v => v.NumberOfFloors).HasColumnName("number_of_floors");
+                view.Property(v => v.NumberOfRooms).HasColumnName("number_of_rooms");
+                view.Property(v => v.OfferName).HasColumnName("offer_name");
+                view.Property(v => v.OfferType).HasColumnName("offer_type");
+                view.Property(v => v.OtherDetails).HasColumnName("other_details");
+                view.Property(v => v.ParkingSpace).HasColumnName("parking_space");
+                view.Property(v => v.Price).HasColumnName("price");
+                view.Property(v => v.PriceForMeter).HasColumnName("price_for_meter");
+                view.Property(v => v.PropertyArea).HasColumnName("property_area");
+                view.Property(v => v.PropertyState).HasColumnName("property_state");
+                view.Property(v => v.PublishingDate).HasColumnName("publishing_date");
+                view.Property(v => v.RentValue).HasColumnName("rent_value");
+                view.Property(v => v.Street).HasColumnName("street");
+                view.Property(v => v.TradeArea).HasColumnName("area");
+                view.Property(v => v.ZipCode).HasColumnName("zip_code");
+
             });
 
             modelBuilder.Entity<EstateOfferPreview>(view =>
