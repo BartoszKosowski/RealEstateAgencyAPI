@@ -19,10 +19,11 @@ namespace RealEstateAgencyAPI.Models
         public string OfferType { get; set; }
         public bool? HasRent { get; set; }
         public decimal? RentValue { get; set; }
+        public string Market { get;set; }
         #endregion
 
         #region apartment entity
-        public byte? PropertyState { get; set; }
+        public string PropertyState { get; set; }
         public decimal? PropertyArea { get; set; }
         public bool? Furnishings { get; set; }
         public bool? HasBalcony { get; set; }

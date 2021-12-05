@@ -308,6 +308,8 @@ namespace RealEstateAgencyAPI.Models
                     .HasColumnType("bit(1)")
                     .HasColumnName("furnishings");
 
+                entity.Property(e => e.GasInstallation).HasColumnName("gas_installation").HasColumnType("tinyint(1)");
+
                 entity.Property(e => e.HasBalcony)
                     .HasColumnType("bit(1)")
                     .HasColumnName("has_balcony");
@@ -487,6 +489,7 @@ namespace RealEstateAgencyAPI.Models
                 entity.Property(e => e.Estate).HasColumnName("estate");
 
                 entity.Property(e => e.PriceForMeter).HasColumnName("price_column_name").HasColumnType("decimal(8,2)");
+                entity.Property(e => e.Market).HasColumnType("varchar(75)").HasColumnName("market");
                 entity.Property(e => e.Name).HasColumnName("name").HasColumnType("varchar(150)");
                 entity.Property(e => e.OfferType).HasColumnName("offer_type").HasColumnType("varchar(150)");
 
@@ -666,6 +669,7 @@ namespace RealEstateAgencyAPI.Models
             {
                 view.HasNoKey();
                 view.ToView("apartment_offer_preview_view");
+                view.Property(v => v.Agent).HasColumnName("agent");
                 view.Property(v => v.Area).HasColumnName("property_area");
                 view.Property(v => v.City).HasColumnName("city");
                 view.Property(v => v.IdOffer).HasColumnName("id_offers");
@@ -713,6 +717,7 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.IdOffers).HasColumnName("id_offers");
                 view.Property(v => v.InsideDesign).HasColumnName("inside_design");
                 view.Property(v => v.KitchenEquipment).HasColumnName("kitchen_equipment");
+                view.Property(v => v.Market).HasColumnName("market");
                 view.Property(v => v.NumberOfFloors).HasColumnName("number_of_floors");
                 view.Property(v => v.NumberOfRooms).HasColumnName("number_of_rooms");
                 view.Property(v => v.OfferName).HasColumnName("offer_name");
@@ -735,6 +740,7 @@ namespace RealEstateAgencyAPI.Models
             {
                 view.HasNoKey();
                 view.ToView("estate_offer_preview_view");
+                view.Property(v => v.Agent).HasColumnName("agent");
                 view.Property(v => v.Area).HasColumnName("property_area");
                 view.Property(v => v.City).HasColumnName("city");
                 view.Property(v => v.IdOffer).HasColumnName("id_offers");
@@ -774,12 +780,14 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.Floors).HasColumnName("floors");
                 view.Property(v => v.Furnishings).HasColumnName("furnishings");
                 view.Property(v => v.Garage).HasColumnName("garage");
+                view.Property(v => v.GasInstallation).HasColumnName("gas_installation");
                 view.Property(v => v.GoogleMapsUrl).HasColumnName("google_maps_url");
                 view.Property(v => v.HasBalcony).HasColumnName("has_balcony");
                 view.Property(v => v.HasRent).HasColumnName("has_rent");
                 view.Property(v => v.Heating).HasColumnName("heating");
                 view.Property(v => v.IdOffers).HasColumnName("id_offers");
                 view.Property(v => v.MainPhotoUrl).HasColumnName("main_photo_url");
+                view.Property(v => v.Market).HasColumnName("market");
                 view.Property(v => v.NumberOfRooms).HasColumnName("number_of_rooms");
                 view.Property(v => v.OfferName).HasColumnName("offer_name");
                 view.Property(v => v.OfferType).HasColumnName("offer_type");

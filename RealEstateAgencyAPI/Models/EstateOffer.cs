@@ -19,13 +19,14 @@ namespace RealEstateAgencyAPI.Models
         public string OfferType { get; set; }
         public bool? HasRent { get; set; }
         public decimal? RentValue { get; set; }
+        public string Market { get; set; }
         #endregion
 
         #region estate entity
         public string PropertyType { get; set; }
         public decimal? PropertyArea { get; set; }
         public short? BuildDate { get; set; }
-        public byte? PropertyStatus { get; set; }
+        public string PropertyStatus { get; set; }
         public short? NumberOfRooms { get; set; }
         public byte? Floors { get; set; }
         public string OtherDetails { get; set; }
@@ -41,6 +42,7 @@ namespace RealEstateAgencyAPI.Models
         public bool? Fence { get; set; }
         public string Heating { get; set; }
         public bool? Sewers { get; set; }
+        public bool? GasInstallation { get; set; }
 
         public decimal? DistanceToForest { get; set; }
         public decimal? DistanceToRiver { get; set; }

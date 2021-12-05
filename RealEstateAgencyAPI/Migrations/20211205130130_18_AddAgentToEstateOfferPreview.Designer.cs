@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstateAgencyAPI.Models;
 
 namespace RealEstateAgencyAPI.Migrations
 {
     [DbContext(typeof(estate_agency_dbContext))]
-    partial class estate_agency_dbContextModelSnapshot : ModelSnapshot
+    [Migration("20211205130130_18_AddAgentToEstateOfferPreview")]
+    partial class _18_AddAgentToEstateOfferPreview
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -397,10 +399,6 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnType("text")
                         .HasColumnName("kitchen_equipment");
 
-                    b.Property<string>("Market")
-                        .HasColumnType("text")
-                        .HasColumnName("market");
-
                     b.Property<byte?>("NumberOfFloors")
                         .HasColumnType("tinyint unsigned")
                         .HasColumnName("number_of_floors");
@@ -778,10 +776,6 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("garage");
 
-                    b.Property<bool?>("GasInstallation")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("gas_installation");
-
                     b.Property<string>("GoogleMapsUrl")
                         .HasColumnType("text")
                         .HasColumnName("google_maps_url");
@@ -805,10 +799,6 @@ namespace RealEstateAgencyAPI.Migrations
                     b.Property<string>("MainPhotoUrl")
                         .HasColumnType("text")
                         .HasColumnName("main_photo_url");
-
-                    b.Property<string>("Market")
-                        .HasColumnType("text")
-                        .HasColumnName("market");
 
                     b.Property<short?>("NumberOfRooms")
                         .HasColumnType("smallint")
@@ -842,8 +832,8 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnType("decimal(18, 2)")
                         .HasColumnName("property_area");
 
-                    b.Property<string>("PropertyStatus")
-                        .HasColumnType("text")
+                    b.Property<byte?>("PropertyStatus")
+                        .HasColumnType("tinyint unsigned")
                         .HasColumnName("property_status");
 
                     b.Property<string>("PropertyType")
@@ -1047,10 +1037,6 @@ namespace RealEstateAgencyAPI.Migrations
                     b.Property<bool?>("IsEstate")
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("is_estate");
-
-                    b.Property<string>("Market")
-                        .HasColumnType("varchar(75)")
-                        .HasColumnName("market");
 
                     b.Property<string>("Name")
                         .HasColumnType("varchar(150)")

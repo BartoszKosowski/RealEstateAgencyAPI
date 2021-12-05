@@ -8,6 +8,7 @@ namespace RealEstateAgencyAPI.Models
     public class ApartmentOfferPreview
     {
         public int IdOffer { get; }
+        public int Agent { get; }
         public string Name { get; }
         public string Street { get; }
         public string City { get; }
@@ -20,6 +21,6 @@ namespace RealEstateAgencyAPI.Models
         public string MainPhotoUrl { get; }
         public byte? OfferStatus { get; }
         public bool? HasRent { get; }
-        public bool? RentValue { get; }
+        public decimal? RentValue { get; }
     }
 }
