@@ -41,6 +41,20 @@ namespace RealEstateAgencyAPI.Controllers
             return status;
         }
 
+        //GET: api/Status/domain/domain
+        [HttpGet("domain/{domain}")]
+        public async Task<ActionResult<IEnumerable<object>>> GetStatusesByDomain(string domain)
+        {
+            var statuses = await _context.Statuses.Where(x => x.Domain == domain).Select(x => new { x.Name, x.IdStatus }).Distinct().ToListAsync();
+
+            if (statuses == null)
+            {
+                return NotFound();
+            }
+
+            return statuses;
+        }
+
         // PUT: api/Status/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

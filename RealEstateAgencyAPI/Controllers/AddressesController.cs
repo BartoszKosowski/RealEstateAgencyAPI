@@ -41,6 +41,13 @@ namespace RealEstateAgencyAPI.Controllers
             return address;
         }
 
+        //GET: api/Addresses/cities
+        [HttpGet("cities")]
+        public async Task<ActionResult<IEnumerable<string>>> GetCities()
+        {
+            return await _context.Addresses.Select(city => city.City).Distinct().ToListAsync();
+        }
+
         // PUT: api/Addresses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

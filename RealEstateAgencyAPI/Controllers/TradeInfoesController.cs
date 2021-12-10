@@ -43,16 +43,16 @@ namespace RealEstateAgencyAPI.Controllers
 
         //GET: api/TradeInfoes/domain#tradeArea
         [HttpGet("domain/{domain}")]
-        public List<TradeInfo> GetTradeInfoByDomain(string domain)
+        public async Task<ActionResult<IEnumerable<string>>> GetTradeInfoByDomain(string domain)
         {
-            var tradeInfos = _context.TradeInfos.Where(x => x.Domain == domain).Select(x => x).Distinct();
+            var tradeInfos = await _context.TradeInfos.Where(x => x.Domain == domain).Select(x => x.Name).Distinct().ToListAsync();
 
             if(tradeInfos == null)
             {
-                return ((IQueryable<TradeInfo>)NotFound()).ToList();
+                return NotFound();
             }
 
-            return tradeInfos.ToList();
+            return tradeInfos;
         }
 
         // PUT: api/TradeInfoes/5
