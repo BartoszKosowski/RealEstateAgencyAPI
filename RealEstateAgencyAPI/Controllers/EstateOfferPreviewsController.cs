@@ -31,10 +31,7 @@ namespace RealEstateAgencyAPI.Controllers
         public async Task<ActionResult<IEnumerable<EstateOfferPreview>>> GetSpecificOfferPreviews(string query)
         {
             var estates = await _context.EstateOffers.FromSqlRaw(GetSqlExpression(query)).ToListAsync();
-            if (estates.Count == 0)
-            {
-                return NotFound();
-            }
+
             var idEstates = estates.Select(a => a.IdOffers).ToList();
             return await _context.EstateOfferPreviews.Where(a => idEstates.Contains(a.IdOffer)).ToListAsync();
         }

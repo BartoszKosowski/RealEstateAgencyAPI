@@ -27,22 +27,12 @@ namespace RealEstateAgencyAPI.Controllers
             return await _context.ApartmentOfferPreviews.ToListAsync();
         }
 
-        ////GET: api/ApartmentOfferPreviews/id/2
-        //[HttpGet("/id/{id}")]
-        //public async Task<ActionResult<ApartmentOfferPreview>> GetApartmentOfferPreviewsById(int id)
-        //{
-            
-        //}
-
         //GET: api/ApartmentOfferPreviews/params
         [HttpGet("{query}")]
         public async Task<ActionResult<IEnumerable<ApartmentOfferPreview>>> GetSpecificApartmentOfferPreviews(string query)
         {
             var apartments = await _context.ApartmentOffers.FromSqlRaw(GetSqlExpression(query)).ToListAsync();
-            if(apartments.Count == 0)
-            {
-                return NotFound();
-            }
+
             var idApartments = apartments.Select(a => a.IdOffers).ToList();
             return await _context.ApartmentOfferPreviews.Where(a => idApartments.Contains(a.IdOffer)).ToListAsync();
         }
@@ -124,6 +114,16 @@ namespace RealEstateAgencyAPI.Controllers
                         case "numberOfFloorsTo":
                             {
                                 sqlExpression += $" number_of_floors < {paramArray[1]}";
+                                break;
+                            }
+                        case "areaFrom":
+                            {
+                                sqlExpression += $" property_area > {paramArray[1]}";
+                                break;
+                            };
+                        case "areaTo":
+                            {
+                                sqlExpression += $" property_area < {paramArray[1]}";
                                 break;
                             }
                         case "agents":
