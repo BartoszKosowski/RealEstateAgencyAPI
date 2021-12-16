@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RealEstateAgencyAPI.Models;
-using System;
+using RealEstateAgencyAPI.Models.FuzzyLogic;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,6 +33,22 @@ namespace RealEstateAgencyAPI.Controllers
 
             var idEstates = estates.Select(a => a.IdOffers).ToList();
             return await _context.EstateOfferPreviews.Where(a => idEstates.Contains(a.IdOffer)).ToListAsync();
+        }
+
+        [HttpGet("fuzzy/{query}")]
+        public async Task<ActionResult<IEnumerable<EstateOfferPreview>>> GetFuzzyOfferPreviews(string query)
+        {
+            var estates = await _context.EstateOfferPreviews.ToListAsync();
+            
+            if (!query.Contains("empty"))
+            {
+                FuzzyQueryEstates fuzzyQueryEstates = new FuzzyQueryEstates(estates, query.Split("~"));
+                return fuzzyQueryEstates.GetRecords();
+            }
+            else
+            {
+                return estates;
+            }
         }
 
         private string GetSqlExpression(string query)
