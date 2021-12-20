@@ -21,7 +21,6 @@ namespace RealEstateAgencyAPI.Models
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Agent> Agents { get; set; }
         public virtual DbSet<Estate> Estates { get; set; }
-        public virtual DbSet<Meeting> Meetings { get; set; }
         public virtual DbSet<Offer> Offers { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Status> Statuses { get; set; }
@@ -38,7 +37,7 @@ namespace RealEstateAgencyAPI.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySQL("server=localhost;port=3300;user=root;password=Start123!;database=estate_agency_db");
+                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=Start123!;database=estate_agency_db");
             }
         }
 
@@ -392,70 +391,6 @@ namespace RealEstateAgencyAPI.Models
                     .WithMany(p => p.Estates)
                     .HasForeignKey(d => d.PropertyType)
                     .HasConstraintName("FK_estate_trade_type");
-            });
-
-            modelBuilder.Entity<Meeting>(entity =>
-            {
-                entity.HasKey(e => e.IdMeetings)
-                    .HasName("PRIMARY");
-
-                entity.ToTable("meetings");
-
-                entity.HasIndex(e => e.EstateAddress, "FK_estate_address_idx");
-
-                entity.HasIndex(e => e.Agent, "FK_meetings_agent_idx");
-
-                entity.HasIndex(e => e.Status, "FK_meetings_status_idx");
-
-                entity.HasIndex(e => e.IdMeetings, "id_meetings_UNIQUE")
-                    .IsUnique();
-
-                entity.Property(e => e.IdMeetings).HasColumnName("id_meetings");
-
-                entity.Property(e => e.Agent).HasColumnName("agent");
-
-                entity.Property(e => e.CustomerEmail)
-                    .HasMaxLength(70)
-                    .HasColumnName("customer_email");
-
-                entity.Property(e => e.CustomerName)
-                    .HasMaxLength(90)
-                    .HasColumnName("customer_name");
-
-                entity.Property(e => e.CustomerNumber)
-                    .HasMaxLength(12)
-                    .HasColumnName("customer_number");
-
-                entity.Property(e => e.DateOfMeeting).HasColumnName("date_of_meeting");
-
-                entity.Property(e => e.EstateAddress).HasColumnName("estate_address");
-
-                entity.Property(e => e.InEstate)
-                    .HasColumnType("bit(1)")
-                    .HasColumnName("in_estate");
-
-                entity.Property(e => e.OtherAddress)
-                    .HasMaxLength(200)
-                    .HasColumnName("other_address");
-
-                entity.Property(e => e.Status)
-                    .HasColumnType("tinyint")
-                    .HasColumnName("status");
-
-                entity.HasOne(d => d.AgentNavigation)
-                    .WithMany(p => p.Meetings)
-                    .HasForeignKey(d => d.Agent)
-                    .HasConstraintName("FK_meetings_agent");
-
-                entity.HasOne(d => d.EstateAddressNavigation)
-                    .WithMany(p => p.Meetings)
-                    .HasForeignKey(d => d.EstateAddress)
-                    .HasConstraintName("FK_meetings_address");
-
-                entity.HasOne(d => d.StatusNavigation)
-                    .WithMany(p => p.Meetings)
-                    .HasForeignKey(d => d.Status)
-                    .HasConstraintName("FK_meetings_status");
             });
 
             modelBuilder.Entity<Offer>(entity =>

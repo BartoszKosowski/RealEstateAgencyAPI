@@ -10,7 +10,6 @@ namespace RealEstateAgencyAPI.Models
         public Status()
         {
             Estates = new HashSet<Estate>();
-            Meetings = new HashSet<Meeting>();
             Offers = new HashSet<Offer>();
             Requests = new HashSet<Request>();
             Apartments = new HashSet<Apartment>();
@@ -23,7 +22,6 @@ namespace RealEstateAgencyAPI.Models
         public string Desc { get; set; }
 
         public virtual ICollection<Estate> Estates { get; set; }
-        public virtual ICollection<Meeting> Meetings { get; set; }
         public virtual ICollection<Offer> Offers { get; set; }
         public virtual ICollection<Request> Requests { get; set; }
         public virtual ICollection<Apartment> Apartments { get; set; }

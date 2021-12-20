@@ -80,5 +80,4 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
             }
         }
     }
-    }
 }

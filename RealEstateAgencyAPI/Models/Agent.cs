@@ -9,7 +9,6 @@ namespace RealEstateAgencyAPI.Models
     {
         public Agent()
         {
-            Meetings = new HashSet<Meeting>();
             Offers = new HashSet<Offer>();
         }
 
@@ -24,7 +23,6 @@ namespace RealEstateAgencyAPI.Models
         public string Description { get; set; }
 
         public virtual TradeInfo AreaNavigation { get; set; }
-        public virtual ICollection<Meeting> Meetings { get; set; }
         public virtual ICollection<Offer> Offers { get; set; }
     }
 }

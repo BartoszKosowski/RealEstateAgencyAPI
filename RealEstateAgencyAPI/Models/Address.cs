@@ -10,7 +10,7 @@ namespace RealEstateAgencyAPI.Models
         public Address()
         {
             Estates = new HashSet<Estate>();
-            Meetings = new HashSet<Meeting>();
+            Apartments = new HashSet<Apartment>();
         }
 
         public int IdAddress { get; set; }
@@ -22,7 +22,6 @@ namespace RealEstateAgencyAPI.Models
         public string GoogleMapsUrl { get; set; }
 
         public virtual ICollection<Estate> Estates { get; set; }
-        public virtual ICollection<Meeting> Meetings { get; set; }
         public virtual ICollection<Apartment> Apartments { get; set; }
     }
 }
