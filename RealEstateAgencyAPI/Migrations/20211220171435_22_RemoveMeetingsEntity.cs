@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace RealEstateAgencyAPI.Migrations
 {
-    public partial class _21_RemoveMeetingsEntity : Migration
+    public partial class _22_RemoveMeetingsEntity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

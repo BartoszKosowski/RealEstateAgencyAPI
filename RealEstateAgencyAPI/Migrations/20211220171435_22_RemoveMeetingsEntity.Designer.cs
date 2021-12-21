@@ -10,7 +10,7 @@ namespace RealEstateAgencyAPI.Migrations
 {
     [DbContext(typeof(estate_agency_dbContext))]
     [Migration("20211220171435_21_RemoveMeetingsEntity")]
-    partial class _21_RemoveMeetingsEntity
+    partial class _22_RemoveMeetingsEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

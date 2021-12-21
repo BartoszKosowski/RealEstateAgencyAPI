@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RealEstateAgencyAPI.Models;
+using RealEstateAgencyAPI.Services;
 
 namespace RealEstateAgencyAPI.Controllers
 {
@@ -79,6 +78,9 @@ namespace RealEstateAgencyAPI.Controllers
         {
             _context.Request.Add(request);
             await _context.SaveChangesAsync();
+
+            Sender sender = new Sender(request);
+            sender.Send();
 
             return CreatedAtAction("GetRequest", new { id = request.IdRequest }, request);
         }
