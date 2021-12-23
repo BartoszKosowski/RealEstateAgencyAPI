@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Linq;
 
 namespace RealEstateAgencyAPI.Models.FuzzyLogic
 {
     static internal class SimilarityComputing
     {
         private static bool s_testIsLongerOrEqual = false;
-        private static byte[] s_truthTable;
-        private static byte[] s_valueToCompare;
+        private static bool[] s_truthTable;
+        private static bool[] s_valueToCompare;
         private static double s_distance = 0;
         private static double s_firstDenominator = 0;
         private static double s_nominator = 0;
@@ -14,14 +15,14 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
         private static double s_sum;
         private static int s_length;
 
-        public static double Distance(byte[] test, byte[] question)
+        public static double Distance(bool[] test, bool[] question)
         {
             
             FormatArray(test, question);
 
             for (int i = 0; i < test.Length; i++)
             {
-                s_distance += Math.Pow((test[i] - question[i]), 2);
+                s_distance += Math.Pow(((test[i] ? 1 : 0) - (question[i] ? 1 : 0)), 2);
             }
 
             return Math.Sqrt(s_distance);
@@ -33,21 +34,22 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
 
             for (int i = 0; i < s_length; i++)
             {
-                s_distance += Math.Pow((s_truthTable[i] - s_valueToCompare[i]), 2);
+                s_distance += Math.Pow(((s_truthTable[i] ? 1 : 0) - (s_valueToCompare[i] ? 1 : 0)), 2);
             }
 
             return Math.Sqrt(s_distance);
         }
 
-        public static double Similarity(byte[] test, byte[] question)
+        public static double Similarity(bool[] test, bool[] question)
         {
             FormatArray(test, question);
 
+            s_firstDenominator = test.Count(t => t);
+            s_secondDenominator = question.Count(q => q);
+
             for (int i = 0; i < test.Length; i++)
             {
-                s_nominator += test[i] * question[i];
-                s_firstDenominator += test[i];
-                s_secondDenominator += question[i];
+                s_nominator += (test[i] && question[i]) ? 1: 0;
             }
 
             s_sum = Math.Sqrt(s_firstDenominator) * Math.Sqrt(s_secondDenominator);
@@ -72,7 +74,7 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
             return Similarity(s_valueToCompare, s_truthTable);
         }
 
-        private static void FormatArray(byte[] test, byte[] question)
+        private static void FormatArray(bool[] test, bool[] question)
         {
             if (test.Length != question.Length)
             {
@@ -81,7 +83,7 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
                     Array.Resize(ref question, test.Length);
                     for (int i = question.Length; i < test.Length; i++)
                     {
-                        question[i] = 0;
+                        question[i] = false;
                     }
                 }
                 else
@@ -89,7 +91,7 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
                     Array.Resize(ref test, question.Length);
                     for (int i = test.Length; i < question.Length; i++)
                     {
-                        test[i] = 0;
+                        test[i] = false;
                     }
                 }
             }
@@ -108,13 +110,13 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
                 s_testIsLongerOrEqual = false;
             }
 
-            s_truthTable = new byte[s_length];
-            s_valueToCompare = new byte[s_length];
+            s_truthTable = new bool[s_length];
+            s_valueToCompare = new bool[s_length];
 
             for (int i = 0; i < s_length; i++)
             {
-                s_truthTable[i] = 1;
-                s_valueToCompare[i] = 0;
+                s_truthTable[i] = true;
+                s_valueToCompare[i] = false;
             }
 
 
@@ -124,7 +126,7 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
                 {
                     if (test[i] == question[i])
                     {
-                        s_valueToCompare[i] = 1;
+                        s_valueToCompare[i] = true;
                     }
                 }
             }
@@ -134,7 +136,7 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
                 {
                     if (test[i] == question[i])
                     {
-                        s_valueToCompare[i] = 1;
+                        s_valueToCompare[i] = true;
                     }
                 }
             }
