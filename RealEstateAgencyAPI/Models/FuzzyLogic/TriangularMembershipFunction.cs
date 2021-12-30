@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace RealEstateAgencyAPI.Models.FuzzyLogic
 {
-    public static class TriangularDistribution
+    public static class TriangularMembershipFunction
     {
         private static Dictionary<int, double> s_selectedValues;
         private static int s_step = 0;
         private static int s_peek;
         private static List<Dictionary<int, double>> s_selectedValuesList;
 
-        public static Dictionary<int, double> CalculateDistribution(int[] field, int peek)
+        public static Dictionary<int, double> CalculateMembershipValue(int[] field, int peek)
         {
             s_peek = peek;
             s_selectedValues = new Dictionary<int, double>();
@@ -23,7 +23,7 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
             return s_selectedValues;
         }
 
-        public static double CalculateDistributionForSingleRecord(int test, int peek)
+        public static double CalculateMembershipValue(int test, int peek)
         {
             s_peek = peek;
             SetStep();
@@ -36,13 +36,13 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
             return -1;
         }
 
-        public static List<Dictionary<int, double>> CalculateDistribution(List<int[]> fields, List<int> peeks)
+        public static List<Dictionary<int, double>> CalculateMembershipValue(List<int[]> fields, List<int> peeks)
         {
             s_selectedValuesList = new List<Dictionary<int, double>>();
 
             for (int i = 0; i < fields.Count; i++)
             {
-                s_selectedValuesList.Add(CalculateDistribution(fields[i], peeks[i]));
+                s_selectedValuesList.Add(CalculateMembershipValue(fields[i], peeks[i]));
             }
 
             return s_selectedValuesList;
@@ -67,21 +67,21 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
 
         private static void SetStep()
         {
-            if (s_peek < 11)
+            if(s_peek < 11)
+            {
+                s_step = 1;
+            }
+            if (10 < s_peek && s_peek < 21)
             {
                 s_step = 2;
             }
-            if (10 < s_peek && s_peek < 51)
+            if (20 < s_peek && s_peek < 51)
             {
-                s_step = 5;
+                s_step = (int)(Math.Round(s_peek * 0.15));
             }
-            if (50 < s_peek && s_peek < 151)
+            if (50 < s_peek)
             {
-                s_step = 10;
-            }
-            if (150 < s_peek)
-            {
-                s_step = (int)(Math.Round(s_peek * 0.9));
+                s_step = (int)(Math.Round(s_peek * 0.1));
             }
         }
     }

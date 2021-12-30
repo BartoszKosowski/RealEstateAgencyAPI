@@ -46,11 +46,11 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
                 {
                     if (_selectedEstates.Count == 0)
                     {
-                        _selectedEstates = _allEstates.Where(x => TriangularDistribution.CalculateDistributionForSingleRecord((int)x.Price, Int32.Parse(paramArray[1])) > 0).ToList();
+                        _selectedEstates = _allEstates.Where(x => TriangularMembershipFunction.CalculateMembershipValue((int)x.Price, Int32.Parse(paramArray[1])) > 0).ToList();
                     }
                     else
                     {
-                        _selectedEstates = _selectedEstates.Where(x => TriangularDistribution.CalculateDistributionForSingleRecord((int)x.Price, Int32.Parse(paramArray[1])) > 0).ToList();
+                        _selectedEstates = _selectedEstates.Where(x => TriangularMembershipFunction.CalculateMembershipValue((int)x.Price, Int32.Parse(paramArray[1])) > 0).ToList();
                     }
                 }
 
@@ -58,11 +58,11 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
                 {
                     if (_selectedEstates.Count == 0)
                     {
-                        _selectedEstates = _allEstates.Where(x => TriangularDistribution.CalculateDistributionForSingleRecord((int)x.Area, Int32.Parse(paramArray[1])) > 0).ToList();
+                        _selectedEstates = _allEstates.Where(x => TriangularMembershipFunction.CalculateMembershipValue((int)x.Area, Int32.Parse(paramArray[1])) > 0).ToList();
                     }
                     else
                     {
-                        _selectedEstates = _selectedEstates.Where(x => TriangularDistribution.CalculateDistributionForSingleRecord((int)x.Area, Int32.Parse(paramArray[1])) > 0).ToList();
+                        _selectedEstates = _selectedEstates.Where(x => TriangularMembershipFunction.CalculateMembershipValue((int)x.Area, Int32.Parse(paramArray[1])) > 0).ToList();
                     }
                 }
 

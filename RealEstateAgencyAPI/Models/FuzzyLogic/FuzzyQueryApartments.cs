@@ -45,11 +45,11 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
                 {
                     if (_selectedApartments.Count == 0)
                     {
-                        _selectedApartments = _allApartments.Where(x => TriangularDistribution.CalculateDistributionForSingleRecord((int)x.Price, Int32.Parse(paramArray[1])) > 0).ToList();
+                        _selectedApartments = _allApartments.Where(x => TriangularMembershipFunction.CalculateMembershipValue((int)x.Price, Int32.Parse(paramArray[1])) > 0).ToList();
                     }
                     else
                     {
-                        _selectedApartments = _selectedApartments.Where(x => TriangularDistribution.CalculateDistributionForSingleRecord((int)x.Price, Int32.Parse(paramArray[1])) > 0).ToList();
+                        _selectedApartments = _selectedApartments.Where(x => TriangularMembershipFunction.CalculateMembershipValue((int)x.Price, Int32.Parse(paramArray[1])) > 0).ToList();
                     }
                 }
 
@@ -57,11 +57,11 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
                 {
                     if (_selectedApartments.Count == 0)
                     {
-                        _selectedApartments = _allApartments.Where(x => TriangularDistribution.CalculateDistributionForSingleRecord((int)x.Area, Int32.Parse(paramArray[1])) > 0).ToList();
+                        _selectedApartments = _allApartments.Where(x => TriangularMembershipFunction.CalculateMembershipValue((int)x.Area, Int32.Parse(paramArray[1])) > 0).ToList();
                     }
                     else
                     {
-                        _selectedApartments = _selectedApartments.Where(x => TriangularDistribution.CalculateDistributionForSingleRecord((int)x.Area, Int32.Parse(paramArray[1])) > 0).ToList();
+                        _selectedApartments = _selectedApartments.Where(x => TriangularMembershipFunction.CalculateMembershipValue((int)x.Area, Int32.Parse(paramArray[1])) > 0).ToList();
                     }
                 }
 
