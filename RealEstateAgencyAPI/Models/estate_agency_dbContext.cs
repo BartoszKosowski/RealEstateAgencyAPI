@@ -1,7 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using RealEstateAgencyAPI.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -9,13 +7,16 @@ namespace RealEstateAgencyAPI.Models
 {
     public partial class estate_agency_dbContext : DbContext
     {
-        public estate_agency_dbContext()
+        private readonly IConfiguration _configuration;
+        public estate_agency_dbContext(IConfiguration configuration)
         {
+            _configuration = configuration;
         }
 
-        public estate_agency_dbContext(DbContextOptions<estate_agency_dbContext> options)
+        public estate_agency_dbContext(DbContextOptions<estate_agency_dbContext> options, IConfiguration configuration)
             : base(options)
         {
+            _configuration = configuration;
         }
 
         public virtual DbSet<Address> Addresses { get; set; }
@@ -36,8 +37,7 @@ namespace RealEstateAgencyAPI.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySQL("server=localhost;port=3300;user=root;password=Start123!;database=estate_agency_db");
+                optionsBuilder.UseMySQL(_configuration.GetConnectionString("Prod"));
             }
         }
 

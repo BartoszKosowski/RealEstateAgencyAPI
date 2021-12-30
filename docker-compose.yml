@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  #Database
+  mysql_server:
+    container_name: mysql_server
+    hostname: mysql_server
+    image: mysql:8.0
+    ports:
+        - 3306:3306
+    volumes:
+        - ./init:/docker-entrypoint-initdb.d
+    environment:
+        MYSQL_ROOT_PASSWORD: Start123!
+        MYSQL_DATABASE: estate_agency_db
+  #API
+  realestateagencyapi:
+    container_name: real_estate_api
+    hostname: real_estate_api
+    image: ${DOCKER_REGISTRY-}realestateagencyapi
+    build:
+      context: .
+      dockerfile: RealEstateAgencyAPI/Dockerfile
+    ports:
+        - 5000:80
+        - 5001:443
+    links:
+        - mysql_server:mysql_server
+    depends_on:
+        - mysql_server

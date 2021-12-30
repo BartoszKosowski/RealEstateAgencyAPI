@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MySql.Data.MySqlClient;
-using MySql.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -40,10 +40,12 @@ namespace RealEstateAgencyAPI
                 .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
             //Add dependency injection
-            services.AddDbContext<Models.estate_agency_dbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Test")));
+            //services.AddDbContext<Models.estate_agency_dbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Test")));
+            services.AddDbContext<Models.estate_agency_dbContext>(options => options.UseMySql(Configuration.GetConnectionString("Prod"),
+                ServerVersion.AutoDetect(Configuration.GetConnectionString("Prod")), mySqlOptions => mySqlOptions.EnableRetryOnFailure()));
 
             //MySQL connector
-            services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration.GetConnectionString("Test")));
+            services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration.GetConnectionString("Prod")));
 
 
             services.AddControllers();
