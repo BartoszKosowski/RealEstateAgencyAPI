@@ -17,7 +17,7 @@
 
 
 --
---Initialize database
+-- Initialize database
 --
 CREATE DATABASE IF NOT EXISTS estate_agency_db;
 USE estate_agency_db;

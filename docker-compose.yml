@@ -6,6 +6,7 @@ services:
     container_name: mysql_server
     hostname: mysql_server
     image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
     ports:
         - 3306:3306
     volumes:
@@ -28,3 +29,12 @@ services:
         - mysql_server:mysql_server
     depends_on:
         - mysql_server
+  #Frontend
+  realestateagencyfrontend:
+    container_name: real_estate_frontend
+    hostname: real_estate_frontend
+    image: ${DOCKER_REGISTRY-}realestateagencyfrontend
+    ports:
+        - 3000:3000
+    links:
+        - realestateagencyapi:real_estate_agency_api
