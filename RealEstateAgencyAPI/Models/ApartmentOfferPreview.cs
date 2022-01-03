@@ -12,6 +12,7 @@ namespace RealEstateAgencyAPI.Models
         public string Name { get; }
         public string Street { get; }
         public string City { get; }
+        public string District { get; set; }
         public decimal? Price { get; }
         public decimal? Area { get; }
         public decimal? PriceForMeter { get; }

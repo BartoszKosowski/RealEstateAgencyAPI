@@ -58,6 +58,7 @@ namespace RealEstateAgencyAPI.Models
         public string City { get; set; }
         public string ZipCode { get; set; }
         public string GoogleMapsUrl { get; set; }
+        public string District { get; set; }
 
         #endregion
 

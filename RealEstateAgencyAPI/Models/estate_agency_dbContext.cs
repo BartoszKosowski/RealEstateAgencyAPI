@@ -81,6 +81,10 @@ namespace RealEstateAgencyAPI.Models
                 entity.Property(e => e.GoogleMapsUrl)
                     .HasMaxLength(500)
                     .HasColumnName("google_maps_url");
+
+                entity.Property(e => e.District)
+                .HasMaxLength(150)
+                .HasColumnName("district");
             });
 
             modelBuilder.Entity<Agent>(entity =>
@@ -543,6 +547,7 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.Agent).HasColumnName("agent");
                 view.Property(v => v.Area).HasColumnName("property_area");
                 view.Property(v => v.City).HasColumnName("city");
+                view.Property(v => v.District).HasColumnName("district");
                 view.Property(v => v.IdOffer).HasColumnName("id_offers");
                 view.Property(v => v.Name).HasColumnName("offer_name");
                 view.Property(v => v.NumberOfRooms).HasColumnName("number_of_rooms");
@@ -569,6 +574,7 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.BuildYear).HasColumnName("build_year");
                 view.Property(v => v.City).HasColumnName("city");
                 view.Property(v => v.Details).HasColumnName("details");
+                view.Property(v => v.District).HasColumnName("district");
                 view.Property(v => v.NearCenter).HasColumnName("near_center");
                 view.Property(v => v.NearCoast).HasColumnName("near_coast");
                 view.Property(v => v.NearForest).HasColumnName("near_forest");
@@ -614,6 +620,7 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.Agent).HasColumnName("agent");
                 view.Property(v => v.Area).HasColumnName("property_area");
                 view.Property(v => v.City).HasColumnName("city");
+                view.Property(v => v.District).HasColumnName("district");
                 view.Property(v => v.IdOffer).HasColumnName("id_offers");
                 view.Property(v => v.Name).HasColumnName("offer_name");
                 view.Property(v => v.NumberOfRooms).HasColumnName("number_of_rooms");
@@ -637,6 +644,7 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.BuildDate).HasColumnName("build_date");
                 view.Property(v => v.City).HasColumnName("city");
                 view.Property(v => v.Details).HasColumnName("details");
+                view.Property(v => v.District).HasColumnName("district");
                 view.Property(v => v.NearCenter).HasColumnName("near_center");
                 view.Property(v => v.NearCoast).HasColumnName("near_coast");
                 view.Property(v => v.NearForest).HasColumnName("near_forest");
