@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstateAgencyAPI.Models;
 
 namespace RealEstateAgencyAPI.Migrations
 {
     [DbContext(typeof(estate_agency_dbContext))]
-    partial class estate_agency_dbContextModelSnapshot : ModelSnapshot
+    [Migration("20220103171957_23_RemoveDistanceToLocationsFromEstates")]
+    partial class _23_RemoveDistanceToLocationsFromEstates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,6 +153,38 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnType("varchar(100)")
                         .HasColumnName("building_type");
 
+                    b.Property<decimal?>("DistanceToCenter")
+                        .HasColumnType("decimal(3,1)")
+                        .HasColumnName("distance_to_center");
+
+                    b.Property<decimal?>("DistanceToCoast")
+                        .HasColumnType("decimal(3,1)")
+                        .HasColumnName("distance_to_coast");
+
+                    b.Property<decimal?>("DistanceToForest")
+                        .HasColumnType("decimal(3,1)")
+                        .HasColumnName("distance_to_forest");
+
+                    b.Property<decimal?>("DistanceToHighway")
+                        .HasColumnType("decimal(3,1)")
+                        .HasColumnName("distance_to_highway");
+
+                    b.Property<decimal?>("DistanceToLake")
+                        .HasColumnType("decimal(3,1)")
+                        .HasColumnName("distance_to_lake");
+
+                    b.Property<decimal?>("DistanceToMall")
+                        .HasColumnType("decimal(3,1)")
+                        .HasColumnName("distance_to_mall");
+
+                    b.Property<decimal?>("DistanceToMountains")
+                        .HasColumnType("decimal(3,1)")
+                        .HasColumnName("distance_to_mountains");
+
+                    b.Property<decimal?>("DistanceToRiver")
+                        .HasColumnType("decimal(3,1)")
+                        .HasColumnName("distance_to_river");
+
                     b.Property<byte?>("FloorNumber")
                         .HasColumnType("tinyint")
                         .HasColumnName("floor_number");
@@ -289,6 +323,38 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnType("text")
                         .HasColumnName("details");
 
+                    b.Property<decimal?>("DistanceToCenter")
+                        .HasColumnType("decimal(18, 2)")
+                        .HasColumnName("distance_to_center");
+
+                    b.Property<decimal?>("DistanceToCoast")
+                        .HasColumnType("decimal(18, 2)")
+                        .HasColumnName("distance_to_coast");
+
+                    b.Property<decimal?>("DistanceToForest")
+                        .HasColumnType("decimal(18, 2)")
+                        .HasColumnName("distance_to_forest");
+
+                    b.Property<decimal?>("DistanceToHighway")
+                        .HasColumnType("decimal(18, 2)")
+                        .HasColumnName("distance_to_highway");
+
+                    b.Property<decimal?>("DistanceToLake")
+                        .HasColumnType("decimal(18, 2)")
+                        .HasColumnName("distance_to_lake");
+
+                    b.Property<decimal?>("DistanceToMall")
+                        .HasColumnType("decimal(18, 2)")
+                        .HasColumnName("distance_to_mall");
+
+                    b.Property<decimal?>("DistanceToMountains")
+                        .HasColumnType("decimal(18, 2)")
+                        .HasColumnName("distance_to_mountains");
+
+                    b.Property<decimal?>("DistanceToRiver")
+                        .HasColumnType("decimal(18, 2)")
+                        .HasColumnName("distance_to_river");
+
                     b.Property<string>("EstateNumber")
                         .HasColumnType("text")
                         .HasColumnName("estate_number");
@@ -336,38 +402,6 @@ namespace RealEstateAgencyAPI.Migrations
                     b.Property<string>("Market")
                         .HasColumnType("text")
                         .HasColumnName("market");
-
-                    b.Property<bool?>("NearCenter")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("near_center");
-
-                    b.Property<bool?>("NearCoast")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("near_coast");
-
-                    b.Property<bool?>("NearForest")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("near_forest");
-
-                    b.Property<bool?>("NearHighway")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("near_highway");
-
-                    b.Property<bool?>("NearLake")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("near_lake");
-
-                    b.Property<bool?>("NearMall")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("near_mall");
-
-                    b.Property<bool?>("NearMountains")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("near_mountains");
-
-                    b.Property<bool?>("NearRiver")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("near_river");
 
                     b.Property<byte?>("NumberOfFloors")
                         .HasColumnType("tinyint unsigned")

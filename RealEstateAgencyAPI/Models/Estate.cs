@@ -44,14 +44,6 @@ namespace RealEstateAgencyAPI.Models
         public bool? NearMall { get; set; }
         public bool? NearLake { get; set; }
         public bool? NearCoast { get; set; }
-        public decimal? DistanceToForest { get; set; }
-        public decimal? DistanceToRiver { get; set; }
-        public decimal? DistanceToMountains { get; set; }
-        public decimal? DistanceToHighway { get; set; }
-        public decimal? DistanceToCenter { get; set; }
-        public decimal? DistanceToMall { get; set; }
-        public decimal? DistanceToLake { get; set; }
-        public decimal? DistanceToCoast { get; set; }
 
         public virtual Address AddressNavigation { get; set; }
         public virtual Status PropertyStatusNavigation { get; set; }

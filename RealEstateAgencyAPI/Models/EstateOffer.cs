@@ -44,14 +44,14 @@ namespace RealEstateAgencyAPI.Models
         public bool? Sewers { get; set; }
         public bool? GasInstallation { get; set; }
 
-        public decimal? DistanceToForest { get; set; }
-        public decimal? DistanceToRiver { get; set; }
-        public decimal? DistanceToMountains { get; set; }
-        public decimal? DistanceToHighway { get; set; }
-        public decimal? DistanceToCenter { get; set; }
-        public decimal? DistanceToMall { get; set; }
-        public decimal? DistanceToLake { get; set; }
-        public decimal? DistanceToCoast { get; set; }
+        public bool? NearForest { get; set; }
+        public bool? NearRiver { get; set; }
+        public bool? NearMountains { get; set; }
+        public bool? NearHighway { get; set; }
+        public bool? NearCenter { get; set; }
+        public bool? NearMall { get; set; }
+        public bool? NearLake { get; set; }
+        public bool? NearCoast { get; set; }
         #endregion
 
         #region address entity

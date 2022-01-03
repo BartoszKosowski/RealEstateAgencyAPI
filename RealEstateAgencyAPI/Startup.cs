@@ -34,18 +34,21 @@ namespace RealEstateAgencyAPI
             services.AddCors(c =>
                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
+            //services.AddCors(c =>
+            //    c.AddPolicy("ProdPolicy", options => options.WithOrigins("localhost:3000").AllowAnyMethod().AllowAnyHeader()));
+
             //JSON serializer
             services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings
             .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
                 .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
             //Add dependency injection
-            //services.AddDbContext<Models.estate_agency_dbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Test")));
-            services.AddDbContext<Models.estate_agency_dbContext>(options => options.UseMySql(Configuration.GetConnectionString("Prod"),
-                ServerVersion.AutoDetect(Configuration.GetConnectionString("Prod")), mySqlOptions => mySqlOptions.EnableRetryOnFailure()));
+            services.AddDbContext<Models.estate_agency_dbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Dev")));
+            //services.AddDbContext<Models.estate_agency_dbContext>(options => options.UseMySql(Configuration.GetConnectionString("Prod"),
+            //    ServerVersion.AutoDetect(Configuration.GetConnectionString("Prod")), mySqlOptions => mySqlOptions.EnableRetryOnFailure()));
 
             //MySQL connector
-            services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration.GetConnectionString("Prod")));
+            services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration.GetConnectionString("Dev")));
 
 
             services.AddControllers();
@@ -58,7 +61,6 @@ namespace RealEstateAgencyAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
 
 
             if (env.IsDevelopment())
@@ -73,6 +75,7 @@ namespace RealEstateAgencyAPI
             app.UseRouting();
 
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            //app.UseCors(options => options.WithOrigins("localhost:3000").AllowAnyHeader().AllowAnyMethod());
 
             app.UseAuthorization();
 

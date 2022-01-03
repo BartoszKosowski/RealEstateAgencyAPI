@@ -37,7 +37,7 @@ namespace RealEstateAgencyAPI.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL(_configuration.GetConnectionString("Prod"));
+                optionsBuilder.UseMySQL(_configuration.GetConnectionString("Dev"));
             }
         }
 
@@ -154,38 +154,6 @@ namespace RealEstateAgencyAPI.Models
                 entity.Property(e => e.BuildingType).HasColumnType("varchar(100)").HasColumnName("building_type");
                 entity.Property(e => e.BuildYear).HasColumnType("int").HasColumnName("build_year");
 
-                entity.Property(e => e.DistanceToCenter)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_center");
-
-                entity.Property(e => e.DistanceToCoast)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_coast");
-
-                entity.Property(e => e.DistanceToForest)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_forest");
-
-                entity.Property(e => e.DistanceToHighway)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_highway");
-
-                entity.Property(e => e.DistanceToLake)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_lake");
-
-                entity.Property(e => e.DistanceToMall)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_mall");
-
-                entity.Property(e => e.DistanceToMountains)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_mountains");
-
-                entity.Property(e => e.DistanceToRiver)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_river");
-
                 entity.Property(e => e.FloorNumber).HasColumnType("tinyint").HasColumnName("floor_number");
                 entity.Property(e => e.Furnishings).HasColumnType("tinyint(1)").HasColumnName("furnishings");
                 entity.Property(e => e.HasBalcony).HasColumnType("tinyint(1)").HasColumnName("has_balcony");
@@ -266,38 +234,6 @@ namespace RealEstateAgencyAPI.Models
                 entity.Property(e => e.BuildDate)
                     .HasColumnType("year")
                     .HasColumnName("build_date");
-
-                entity.Property(e => e.DistanceToCenter)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_center");
-
-                entity.Property(e => e.DistanceToCoast)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_coast");
-
-                entity.Property(e => e.DistanceToForest)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_forest");
-
-                entity.Property(e => e.DistanceToHighway)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_highway");
-
-                entity.Property(e => e.DistanceToLake)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_lake");
-
-                entity.Property(e => e.DistanceToMall)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_mall");
-
-                entity.Property(e => e.DistanceToMountains)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_mountains");
-
-                entity.Property(e => e.DistanceToRiver)
-                    .HasColumnType("decimal(3,1)")
-                    .HasColumnName("distance_to_river");
 
                 entity.Property(e => e.Floors)
                     .HasColumnType("tinyint")
@@ -633,14 +569,14 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.BuildYear).HasColumnName("build_year");
                 view.Property(v => v.City).HasColumnName("city");
                 view.Property(v => v.Details).HasColumnName("details");
-                view.Property(v => v.DistanceToCenter).HasColumnName("distance_to_center");
-                view.Property(v => v.DistanceToCoast).HasColumnName("distance_to_coast");
-                view.Property(v => v.DistanceToForest).HasColumnName("distance_to_forest");
-                view.Property(v => v.DistanceToHighway).HasColumnName("distance_to_highway");
-                view.Property(v => v.DistanceToLake).HasColumnName("distance_to_lake");
-                view.Property(v => v.DistanceToMall).HasColumnName("distance_to_mall");
-                view.Property(v => v.DistanceToMountains).HasColumnName("distance_to_mountains");
-                view.Property(v => v.DistanceToRiver).HasColumnName("distance_to_river");
+                view.Property(v => v.NearCenter).HasColumnName("near_center");
+                view.Property(v => v.NearCoast).HasColumnName("near_coast");
+                view.Property(v => v.NearForest).HasColumnName("near_forest");
+                view.Property(v => v.NearHighway).HasColumnName("near_highway");
+                view.Property(v => v.NearLake).HasColumnName("near_lake");
+                view.Property(v => v.NearMall).HasColumnName("near_mall");
+                view.Property(v => v.NearMountains).HasColumnName("near_mountains");
+                view.Property(v => v.NearRiver).HasColumnName("near_river");
                 view.Property(v => v.EstateNumber).HasColumnName("estate_number");
                 view.Property(v => v.FloorNumber).HasColumnName("floor_number");
                 view.Property(v => v.Furnishings).HasColumnName("furnishings");
@@ -701,14 +637,14 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.BuildDate).HasColumnName("build_date");
                 view.Property(v => v.City).HasColumnName("city");
                 view.Property(v => v.Details).HasColumnName("details");
-                view.Property(v => v.DistanceToCenter).HasColumnName("distance_to_center");
-                view.Property(v => v.DistanceToCoast).HasColumnName("distance_to_coast");
-                view.Property(v => v.DistanceToForest).HasColumnName("distance_to_forest");
-                view.Property(v => v.DistanceToHighway).HasColumnName("distance_to_highway");
-                view.Property(v => v.DistanceToLake).HasColumnName("distance_to_lake");
-                view.Property(v => v.DistanceToMall).HasColumnName("distance_to_mall");
-                view.Property(v => v.DistanceToMountains).HasColumnName("distance_to_mountains");
-                view.Property(v => v.DistanceToRiver).HasColumnName("distance_to_river");
+                view.Property(v => v.NearCenter).HasColumnName("near_center");
+                view.Property(v => v.NearCoast).HasColumnName("near_coast");
+                view.Property(v => v.NearForest).HasColumnName("near_forest");
+                view.Property(v => v.NearHighway).HasColumnName("near_highway");
+                view.Property(v => v.NearLake).HasColumnName("near_lake");
+                view.Property(v => v.NearMall).HasColumnName("near_mall");
+                view.Property(v => v.NearMountains).HasColumnName("near_mountains");
+                view.Property(v => v.NearRiver).HasColumnName("near_river");
                 view.Property(v => v.Electricity).HasColumnName("electricity");
                 view.Property(v => v.EstateNumber).HasColumnName("estate_number");
                 view.Property(v => v.Fence).HasColumnName("fence");
