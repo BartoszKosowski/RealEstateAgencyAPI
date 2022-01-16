@@ -43,9 +43,9 @@ namespace RealEstateAgencyAPI.Controllers
 
         //GET: api/TradeInfoes/domain#tradeArea
         [HttpGet("domain/{domain}")]
-        public async Task<ActionResult<IEnumerable<string>>> GetTradeInfoByDomain(string domain)
+        public async Task<ActionResult<IEnumerable<TradeInfo>>> GetTradeInfoByDomain(string domain)
         {
-            var tradeInfos = await _context.TradeInfos.Where(x => x.Domain == domain).Select(x => x.Name).Distinct().ToListAsync();
+            var tradeInfos = await _context.TradeInfos.Where(x => x.Domain == domain).Distinct().ToListAsync();
 
             if(tradeInfos == null)
             {

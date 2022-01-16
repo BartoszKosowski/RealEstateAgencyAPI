@@ -54,7 +54,7 @@ namespace RealEstateAgencyAPI.Controllers
 
         private string GetSqlExpression(string query)
         {
-            if (query.Contains("empty"))
+            if (query.Contains("empty") || query == "propertyType-Mieszkanie")
             {
                 return @"SELECT * FROM apartment_offer_view";
             }
@@ -144,7 +144,7 @@ namespace RealEstateAgencyAPI.Controllers
                         case "agents":
                             {
                                 sqlExpression += " (";
-                                var agentsNumbers = paramArray[1].Split("-");
+                                var agentsNumbers = paramArray[1].Split("_");
                                 int agentsLength = agentsNumbers.Length;
                                 foreach (var agent in agentsNumbers)
                                 {
@@ -152,55 +152,58 @@ namespace RealEstateAgencyAPI.Controllers
                                     {
                                         sqlExpression += " OR";
                                     }
-                                    sqlExpression += $" agent = {agent}";
-                                    agentsLength--;
+                                    if (!string.IsNullOrEmpty(agent))
+                                    {
+                                        sqlExpression += $" agent = {agent}";
+                                        agentsLength--;
+                                    }
                                 }
                                 sqlExpression += ")";
                                 break;
                             }
                         case "state":
                             {
-                                sqlExpression += $" property_state LIKE {paramArray[1]}";
+                                sqlExpression += $" property_state LIKE \"{paramArray[1]}\"";
                                 break;
                             }
                         case "distForest":
                             {
-                                sqlExpression += $" distance_to_forest IS NOT NULL";
+                                sqlExpression += $" near_forest = 1";
                                 break;
                             }
                         case "distMountains":
                             {
-                                sqlExpression += $" distance_to_mountains IS NOT NULL";
+                                sqlExpression += $" near_mountains = 1";
                                 break;
                             }
                         case "distRiver":
                             {
-                                sqlExpression += $" distance_to_river IS NOT NULL";
+                                sqlExpression += $" near_river = 1";
                                 break;
                             }
                         case "distHighway":
                             {
-                                sqlExpression += $" distance_to_highway IS NOT NULL";
+                                sqlExpression += $" near_highway = 1";
                                 break;
                             }
                         case "distCenter":
                             {
-                                sqlExpression += $" distance_to_center IS NOT NULL";
+                                sqlExpression += $" near_center = 1";
                                 break;
                             }
                         case "distMall":
                             {
-                                sqlExpression += $" distance_to_mall IS NOT NULL";
+                                sqlExpression += $" near_mall = 1";
                                 break;
                             }
                         case "distLake":
                             {
-                                sqlExpression += $" distance_to_lake IS NOT NULL";
+                                sqlExpression += $" near_lake = 1";
                                 break;
                             }
                         case "distCoast":
                             {
-                                sqlExpression += $" distance_to_coast IS NOT NULL";
+                                sqlExpression += $" near_coast = 1";
                                 break;
                             }
                     }

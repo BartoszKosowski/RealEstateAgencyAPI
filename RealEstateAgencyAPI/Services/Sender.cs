@@ -24,7 +24,7 @@ namespace RealEstateAgencyAPI.Services
             using (var smtpClient = new SmtpClient())
             {
                 smtpClient.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-                smtpClient.Authenticate("","");
+                smtpClient.Authenticate("someestates@gmail.com","Start123!");
                 smtpClient.Send(_message);
                 smtpClient.Disconnect(true);
             }
@@ -38,7 +38,7 @@ namespace RealEstateAgencyAPI.Services
 
             var builder = new BodyBuilder();
 
-            builder.HtmlBody = @"<p>Test message body</p>";
+            builder.HtmlBody = @"<p>Zgłoszenie przyjęte</p>";
 
             _message.Body = builder.ToMessageBody();
         }

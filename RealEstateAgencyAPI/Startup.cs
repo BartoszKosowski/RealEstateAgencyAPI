@@ -43,9 +43,9 @@ namespace RealEstateAgencyAPI
                 .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
             //Add dependency injection
-            services.AddDbContext<Models.estate_agency_dbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Dev")));
-            //services.AddDbContext<Models.estate_agency_dbContext>(options => options.UseMySql(Configuration.GetConnectionString("Prod"),
-            //    ServerVersion.AutoDetect(Configuration.GetConnectionString("Prod")), mySqlOptions => mySqlOptions.EnableRetryOnFailure()));
+            //services.AddDbContext<Models.estate_agency_dbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Dev")));
+            services.AddDbContext<Models.estate_agency_dbContext>(options => options.UseMySql(Configuration.GetConnectionString("Prod"),
+                ServerVersion.AutoDetect(Configuration.GetConnectionString("Prod")), mySqlOptions => mySqlOptions.EnableRetryOnFailure()));
 
             //MySQL connector
             services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration.GetConnectionString("Dev")));

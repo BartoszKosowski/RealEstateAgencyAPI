@@ -37,7 +37,7 @@ namespace RealEstateAgencyAPI.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL(_configuration.GetConnectionString("Dev"));
+                optionsBuilder.UseMySQL(_configuration.GetConnectionString("Prod"));
             }
         }
 
