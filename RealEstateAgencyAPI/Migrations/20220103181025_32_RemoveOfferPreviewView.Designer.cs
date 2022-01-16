@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstateAgencyAPI.Models;
 
 namespace RealEstateAgencyAPI.Migrations
 {
     [DbContext(typeof(estate_agency_dbContext))]
-    partial class estate_agency_dbContextModelSnapshot : ModelSnapshot
+    [Migration("20220103181025_32_RemoveOfferPreviewView")]
+    partial class _32_RemoveOfferPreviewView
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,35 +191,35 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnName("main_photo_url");
 
                     b.Property<bool?>("NearCenter")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_center");
 
                     b.Property<bool?>("NearCoast")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_coast");
 
                     b.Property<bool?>("NearForest")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_forest");
 
                     b.Property<bool?>("NearHighway")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_highway");
 
                     b.Property<bool?>("NearLake")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_lake");
 
                     b.Property<bool?>("NearMall")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_mall");
 
                     b.Property<bool?>("NearMountains")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_mountains");
 
                     b.Property<bool?>("NearRiver")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_river");
 
                     b.Property<byte?>("NumberOfFloors")
@@ -227,6 +229,11 @@ namespace RealEstateAgencyAPI.Migrations
                     b.Property<byte?>("NumberOfRooms")
                         .HasColumnType("tinyint")
                         .HasColumnName("number_of_rooms");
+
+                    b.Property<string>("OtherDetails")
+                        .HasMaxLength(5000)
+                        .HasColumnType("text")
+                        .HasColumnName("other_details");
 
                     b.Property<bool?>("ParkingSpace")
                         .HasColumnType("tinyint(1)")
@@ -389,6 +396,10 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnType("text")
                         .HasColumnName("offer_type");
 
+                    b.Property<string>("OtherDetails")
+                        .HasColumnType("text")
+                        .HasColumnName("other_details");
+
                     b.Property<bool?>("ParkingSpace")
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("parking_space");
@@ -534,7 +545,7 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnName("floors");
 
                     b.Property<bool?>("Furnishings")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("furnishings");
 
                     b.Property<bool?>("Garage")
@@ -547,7 +558,7 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnName("electricity");
 
                     b.Property<bool?>("HasBalcony")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("has_balcony");
 
                     b.Property<string>("Heating")
@@ -561,40 +572,44 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnName("main_photo_url");
 
                     b.Property<bool?>("NearCenter")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_center");
 
                     b.Property<bool?>("NearCoast")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_coast");
 
                     b.Property<bool?>("NearForest")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_forest");
 
                     b.Property<bool?>("NearHighway")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_highway");
 
                     b.Property<bool?>("NearLake")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_lake");
 
                     b.Property<bool?>("NearMall")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_mall");
 
                     b.Property<bool?>("NearMountains")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_mountains");
 
                     b.Property<bool?>("NearRiver")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit(1)")
                         .HasColumnName("near_river");
 
                     b.Property<short?>("NumberOfRooms")
                         .HasColumnType("smallint")
                         .HasColumnName("number_of_rooms");
+
+                    b.Property<string>("OtherDetails")
+                        .HasColumnType("text")
+                        .HasColumnName("other_details");
 
                     b.Property<decimal?>("Plot")
                         .HasColumnType("decimal(7,2)")
@@ -761,6 +776,10 @@ namespace RealEstateAgencyAPI.Migrations
                     b.Property<string>("OfferType")
                         .HasColumnType("text")
                         .HasColumnName("offer_type");
+
+                    b.Property<string>("OtherDetails")
+                        .HasColumnType("text")
+                        .HasColumnName("other_details");
 
                     b.Property<decimal?>("Plot")
                         .HasColumnType("decimal(18, 2)")
@@ -949,6 +968,10 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnType("decimal(8,2)")
                         .HasColumnName("price_for_meter");
 
+                    b.Property<bool?>("Promoted")
+                        .HasColumnType("bit(1)")
+                        .HasColumnName("promoted");
+
                     b.Property<DateTime?>("PublishingDate")
                         .HasColumnType("date")
                         .HasColumnName("publishing_date");
@@ -956,6 +979,10 @@ namespace RealEstateAgencyAPI.Migrations
                     b.Property<decimal?>("RentValue")
                         .HasColumnType("decimal(7,2)")
                         .HasColumnName("rent_value");
+
+                    b.Property<int?>("Views")
+                        .HasColumnType("int")
+                        .HasColumnName("views");
 
                     b.HasKey("IdOffers")
                         .HasName("PRIMARY");

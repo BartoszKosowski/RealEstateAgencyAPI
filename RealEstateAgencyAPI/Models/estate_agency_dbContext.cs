@@ -168,41 +168,40 @@ namespace RealEstateAgencyAPI.Models
                 entity.Property(e => e.MainPhotoUrl).HasColumnType("varchar(300)").HasColumnName("main_photo_url");
 
                 entity.Property(e => e.NearCenter)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_center");
 
                 entity.Property(e => e.NearCoast)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_coast");
 
                 entity.Property(e => e.NearForest)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_forest");
 
                 entity.Property(e => e.NearHighway)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_highway");
 
                 entity.Property(e => e.NearLake)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_lake");
 
                 entity.Property(e => e.NearMall)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_mall");
 
                 entity.Property(e => e.NearMountains)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_mountains");
 
                 entity.Property(e => e.NearRiver)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_river");
 
 
                 entity.Property(e => e.NumberOfFloors).HasColumnType("tinyint").HasColumnName("number_of_floors");
                 entity.Property(e => e.NumberOfRooms).HasColumnType("tinyint").HasColumnName("number_of_rooms");
-                entity.Property(e => e.OtherDetails).HasMaxLength(5000).HasColumnName("other_details");
                 entity.Property(e => e.ParkingSpace).HasColumnType("tinyint(1)").HasColumnName("parking_space");
                 entity.Property(e => e.PropertyArea).HasColumnType("decimal(7,2)").HasColumnName("property_area");
                 entity.Property(e => e.PropertyState).HasColumnType("tinyint").HasColumnName("property_state");
@@ -244,13 +243,13 @@ namespace RealEstateAgencyAPI.Models
                     .HasColumnName("floors");
 
                 entity.Property(e => e.Furnishings)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("furnishings");
 
                 entity.Property(e => e.GasInstallation).HasColumnName("gas_installation").HasColumnType("tinyint(1)");
 
                 entity.Property(e => e.HasBalcony)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("has_balcony");
 
                 entity.Property(e => e.MainPhotoUrl)
@@ -258,40 +257,38 @@ namespace RealEstateAgencyAPI.Models
                     .HasColumnName("main_photo_url");
 
                 entity.Property(e => e.NearCenter)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_center");
 
                 entity.Property(e => e.NearCoast)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_coast");
 
                 entity.Property(e => e.NearForest)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_forest");
 
                 entity.Property(e => e.NearHighway)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_highway");
 
                 entity.Property(e => e.NearLake)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_lake");
 
                 entity.Property(e => e.NearMall)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_mall");
 
                 entity.Property(e => e.NearMountains)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_mountains");
 
                 entity.Property(e => e.NearRiver)
-                    .HasColumnType("bit(1)")
+                    .HasColumnType("tinyint(1)")
                     .HasColumnName("near_river");
 
                 entity.Property(e => e.NumberOfRooms).HasColumnName("number_of_rooms");
-
-                entity.Property(e => e.OtherDetails).HasColumnName("other_details");
 
                 entity.Property(e => e.PropertyArea)
                     .HasColumnType("decimal(8,1)")
@@ -380,15 +377,9 @@ namespace RealEstateAgencyAPI.Models
                     .HasColumnType("decimal(8,2)")
                     .HasColumnName("price_for_meter");
 
-                entity.Property(e => e.Promoted)
-                    .HasColumnType("bit(1)")
-                    .HasColumnName("promoted");
-
                 entity.Property(e => e.PublishingDate)
                     .HasColumnType("date")
                     .HasColumnName("publishing_date");
-
-                entity.Property(e => e.Views).HasColumnName("views");
 
                 entity.Property(e => e.HasRent).HasColumnType("tinyint(1)").HasColumnName("has_rent");
                 entity.Property(e => e.RentValue).HasColumnType("decimal(7,2)").HasColumnName("rent_value");
@@ -599,7 +590,6 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.NumberOfRooms).HasColumnName("number_of_rooms");
                 view.Property(v => v.OfferName).HasColumnName("offer_name");
                 view.Property(v => v.OfferType).HasColumnName("offer_type");
-                view.Property(v => v.OtherDetails).HasColumnName("other_details");
                 view.Property(v => v.ParkingSpace).HasColumnName("parking_space");
                 view.Property(v => v.Price).HasColumnName("price");
                 view.Property(v => v.PriceForMeter).HasColumnName("price_for_meter");
@@ -670,7 +660,6 @@ namespace RealEstateAgencyAPI.Models
                 view.Property(v => v.NumberOfRooms).HasColumnName("number_of_rooms");
                 view.Property(v => v.OfferName).HasColumnName("offer_name");
                 view.Property(v => v.OfferType).HasColumnName("offer_type");
-                view.Property(v => v.OtherDetails).HasColumnName("other_details");
                 view.Property(v => v.Plot).HasColumnName("plot");
                 view.Property(v => v.Price).HasColumnName("price");
                 view.Property(v => v.PriceForMeter).HasColumnName("price_for_meter");

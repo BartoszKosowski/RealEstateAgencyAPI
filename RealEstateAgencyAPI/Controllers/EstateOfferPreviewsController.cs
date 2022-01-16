@@ -82,7 +82,7 @@ namespace RealEstateAgencyAPI.Controllers
                             };
                         case "propertyType":
                             {
-                                sqlExpression += $"name LIKE \"{paramArray[1]}\"";
+                                sqlExpression += $" name LIKE \"{paramArray[1]}\"";
                                 break;
                             }
                         case "city":

@@ -29,7 +29,6 @@ namespace RealEstateAgencyAPI.Models
         public string PropertyStatus { get; set; }
         public short? NumberOfRooms { get; set; }
         public byte? Floors { get; set; }
-        public string OtherDetails { get; set; }
         public bool? HasBalcony { get; set; }
         public bool? Furnishings { get; set; }
         public string MainPhotoUrl { get; set; }

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace RealEstateAgencyAPI.Models.FuzzyLogic
 {
-    static internal class SimilarityComputing
+    static internal class SimilarityFunction
     {
         private static bool s_testIsLongerOrEqual = false;
         private static bool[] s_truthTable;
@@ -40,7 +40,18 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
             return Math.Sqrt(s_distance);
         }
 
-        public static double Similarity(bool[] test, bool[] question)
+
+        public static double ComputeSimilarity(string test, string question)
+        {
+            s_nominator = 0;
+            s_secondDenominator = 0;
+            s_firstDenominator = 0;
+            s_sum = 0;
+            FormatData(test.ToLower(), question.ToLower());
+            return ComputeSimilarity(s_valueToCompare, s_truthTable);
+        }
+
+        public static double ComputeSimilarity(bool[] test, bool[] question)
         {
             FormatArray(test, question);
 
@@ -49,7 +60,7 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
 
             for (int i = 0; i < test.Length; i++)
             {
-                s_nominator += (test[i] && question[i]) ? 1: 0;
+                s_nominator += (test[i] && question[i]) ? 1 : 0;
             }
 
             s_sum = Math.Sqrt(s_firstDenominator) * Math.Sqrt(s_secondDenominator);
@@ -61,17 +72,6 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
             {
                 return 0;
             }
-
-        }
-
-        public static double Similarity(string test, string question)
-        {
-            s_nominator = 0;
-            s_secondDenominator = 0;
-            s_firstDenominator = 0;
-            s_sum = 0;
-            FormatData(test.ToLower(), question.ToLower());
-            return Similarity(s_valueToCompare, s_truthTable);
         }
 
         private static void FormatArray(bool[] test, bool[] question)

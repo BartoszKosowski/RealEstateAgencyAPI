@@ -41,7 +41,6 @@ namespace RealEstateAgencyAPI.Models
         public bool? NearMall { get; set; }
         public bool? NearLake { get; set; }
         public bool? NearCoast { get; set; }
-        public string OtherDetails { get; set; }
 
         public virtual Address AddressNavigation { get; set; }
         public virtual Status StatusNavigation { get; set; }

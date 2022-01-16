@@ -14,8 +14,6 @@ namespace RealEstateAgencyAPI.Models
         public byte? Area { get; set; }
         public decimal? Price { get; set; }
         public byte? OfferStatus { get; set; }
-        public int? Views { get; set; }
-        public bool? Promoted { get; set; }
         public string Details { get; set; }
         public string Name { get; set; }
         public decimal? PriceForMeter { get; set; }

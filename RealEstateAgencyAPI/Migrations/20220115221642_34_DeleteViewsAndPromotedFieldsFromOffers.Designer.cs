@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstateAgencyAPI.Models;
 
 namespace RealEstateAgencyAPI.Migrations
 {
     [DbContext(typeof(estate_agency_dbContext))]
-    partial class estate_agency_dbContextModelSnapshot : ModelSnapshot
+    [Migration("20220115221642_34_DeleteViewsAndPromotedFieldsFromOffers")]
+    partial class _34_DeleteViewsAndPromotedFieldsFromOffers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,6 +230,11 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnType("tinyint")
                         .HasColumnName("number_of_rooms");
 
+                    b.Property<string>("OtherDetails")
+                        .HasMaxLength(5000)
+                        .HasColumnType("text")
+                        .HasColumnName("other_details");
+
                     b.Property<bool?>("ParkingSpace")
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("parking_space");
@@ -388,6 +395,10 @@ namespace RealEstateAgencyAPI.Migrations
                     b.Property<string>("OfferType")
                         .HasColumnType("text")
                         .HasColumnName("offer_type");
+
+                    b.Property<string>("OtherDetails")
+                        .HasColumnType("text")
+                        .HasColumnName("other_details");
 
                     b.Property<bool?>("ParkingSpace")
                         .HasColumnType("tinyint(1)")
@@ -596,6 +607,10 @@ namespace RealEstateAgencyAPI.Migrations
                         .HasColumnType("smallint")
                         .HasColumnName("number_of_rooms");
 
+                    b.Property<string>("OtherDetails")
+                        .HasColumnType("text")
+                        .HasColumnName("other_details");
+
                     b.Property<decimal?>("Plot")
                         .HasColumnType("decimal(7,2)")
                         .HasColumnName("plot");
@@ -761,6 +776,10 @@ namespace RealEstateAgencyAPI.Migrations
                     b.Property<string>("OfferType")
                         .HasColumnType("text")
                         .HasColumnName("offer_type");
+
+                    b.Property<string>("OtherDetails")
+                        .HasColumnType("text")
+                        .HasColumnName("other_details");
 
                     b.Property<decimal?>("Plot")
                         .HasColumnType("decimal(18, 2)")

@@ -10,6 +10,8 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
         private readonly List<EstateOfferPreview> _allEstates;
         private readonly string[] _queryParams;
         private List<EstateOfferPreview> _selectedEstates;
+        private string[] _cityParams;
+        private List<EstateOfferPreview> _previousSelectedEstates;
 
         public FuzzyQueryEstates(List<EstateOfferPreview> estates, string[] queryParams)
         {
@@ -30,15 +32,76 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
             {
                 var paramArray = param.Split("-");
 
-                if (paramArray[0] == "offertType")
+                if (paramArray[0] == "city")
+                {
+                    _cityParams = paramArray[1].Split(',');
+
+                    for (int i = 0; i < _cityParams.Length; i++)
+                    {
+                        if (string.IsNullOrWhiteSpace(_cityParams[i][0].ToString()))
+                        {
+                            _cityParams[i] = _cityParams[i][1..];
+                        }
+
+                        _previousSelectedEstates = _selectedEstates;
+                        bool wasFind = false;
+
+                        if (_selectedEstates.Count == 0)
+                        {
+                            _selectedEstates = _allEstates.Where(x => SimilarityFunction.ComputeSimilarity(_cityParams[i], x.City) > 0.8).ToList();
+                        }
+                        else
+                        {
+                            _selectedEstates = _selectedEstates.Where(x => SimilarityFunction.ComputeSimilarity(_cityParams[i], x.City) > 0.8).ToList();
+                        }
+
+                        if (_previousSelectedEstates.Count != _selectedEstates.Count)
+                        {
+                            wasFind = true;
+                        }
+                        else
+                        {
+                            _selectedEstates = _previousSelectedEstates;
+                        }
+
+                        if (wasFind == false)
+                        {
+                            if (_selectedEstates.Count == 0)
+                            {
+                                _selectedEstates = _allEstates.Where(x => SimilarityFunction.ComputeSimilarity(_cityParams[i], x.District) > 0.8).ToList();
+                            }
+                            else
+                            {
+                                _selectedEstates = _allEstates.Where(x => SimilarityFunction.ComputeSimilarity(_cityParams[i], x.District) > 0.8).ToList();
+                            }
+
+                            if (_previousSelectedEstates.Count != _selectedEstates.Count)
+                            {
+                                wasFind = true;
+
+                            }
+                            else
+                            {
+                                _selectedEstates = _previousSelectedEstates;
+                            }
+                        }
+
+                        if (_selectedEstates.Count == 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                if (paramArray[0] == "offerType")
                 {
                     if (_selectedEstates.Count == 0)
                     {
-                        _selectedEstates = _allEstates.Where(x => x.OfferType == paramArray[1]).ToList();
+                        _selectedEstates = _allEstates.Where(x => x.OfferType.ToLower() == paramArray[1].ToLower()).ToList();
                     }
                     else
                     {
-                        _selectedEstates = _selectedEstates.Where(x => x.OfferType == paramArray[1]).ToList();
+                        _selectedEstates = _selectedEstates.Where(x => x.OfferType.ToLower() == paramArray[1].ToLower()).ToList();
                     }
                 }
 
@@ -63,18 +126,6 @@ namespace RealEstateAgencyAPI.Models.FuzzyLogic
                     else
                     {
                         _selectedEstates = _selectedEstates.Where(x => TriangularMembershipFunction.CalculateMembershipValue((int)x.Area, Int32.Parse(paramArray[1])) > 0).ToList();
-                    }
-                }
-
-                if (paramArray[0] == "city")
-                {
-                    if (_selectedEstates.Count == 0)
-                    {
-                        _selectedEstates = _allEstates.Where(x => SimilarityComputing.Similarity(paramArray[1], x.City) > 0.8).ToList();
-                    }
-                    else
-                    {
-                        _selectedEstates = _selectedEstates.Where(x => SimilarityComputing.Similarity(paramArray[1], x.City) > 0.8).ToList();
                     }
                 }
 

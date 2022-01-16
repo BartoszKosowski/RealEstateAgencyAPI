@@ -24,7 +24,7 @@ namespace RealEstateAgencyAPI.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"DROP VIEW [estate_offer_view];");
+            migrationBuilder.Sql(@"DROP VIEW estate_offer_view;");
         }
     }
 }

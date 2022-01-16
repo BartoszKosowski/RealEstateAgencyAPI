@@ -48,7 +48,6 @@ namespace RealEstateAgencyAPI.Models
         public bool? NearMall { get; set; }
         public bool? NearLake { get; set; }
         public bool? NearCoast { get; set; }
-        public string OtherDetails { get; set; }
         #endregion
 
         #region address entity
